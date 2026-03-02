@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Greenhouse Effect - Multimedia Challenge: Comics | Andy Hu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            line-height: 1.8;
+            color: #2c2c2c;
+            background: #f8f8f8;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a5c2e 0%, #2d8a4e 50%, #3da863 100%);
+            color: white;
+            padding: 60px 20px 50px;
+            text-align: center;
+        }
+
+        .header .label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.85;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.6em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .header .subtitle {
+            font-size: 1.15em;
+            font-style: italic;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .header .meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        /* Section Headers */
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #1a5c2e;
+            margin-top: 50px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #2d8a4e;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            color: #444;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        /* Intro Section */
+        .intro {
+            font-size: 1.05em;
+            color: #444;
+            border-left: 4px solid #2d8a4e;
+            padding-left: 20px;
+            margin: 30px 0;
+        }
+
+        /* Prototype Image */
+        .prototype-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .prototype-section img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        .prototype-section .caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: #f0f7f2;
+            border: 1px solid #c8e0ce;
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+
+        .highlight-box.yellow {
+            background: #fefce8;
+            border-color: #e5dc9c;
+        }
+
+        .highlight-box strong {
+            color: #1a5c2e;
+        }
+
+        /* Panel script */
+        .panel-script {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin: 10px 0 16px;
+            font-size: 0.92em;
+        }
+
+        .panel-script .panel-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #1a5c2e;
+            margin-bottom: 4px;
+        }
+
+        .panel-script .scene {
+            color: #555;
+        }
+
+        .panel-script .text-content {
+            color: #333;
+            font-style: italic;
+        }
+
+        /* References */
+        .references {
+            font-size: 0.88em;
+            line-height: 1.7;
+        }
+
+        .references p {
+            padding-left: 36px;
+            text-indent: -36px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        /* Divider */
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 40px 0;
+        }
+
+        /* Bold and emphasis */
+        strong {
+            font-weight: 700;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        /* Print styles */
+        @media print {
+            body { background: white; }
+            .header {
+                background: #1a5c2e !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .container { padding: 20px; }
+            h2 { page-break-after: avoid; }
+            .panel-script { page-break-inside: avoid; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8em; }
+            .container { padding: 20px 15px 40px; }
+            h2 { font-size: 1.3em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="label">EDCI 337 &mdash; Multimedia Challenge: Comics</div>
+        <h1>The Greenhouse Effect</h1>
+        <div class="subtitle">Understanding Climate Change, One Panel at a Time</div>
+        <div class="meta">Andy Hu &nbsp;|&nbsp; February 21, 2026 &nbsp;|&nbsp; University of Victoria</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- PROJECT INTRODUCTION -->
+        <div class="intro">
+            <p>I'm creating an educational comic about the greenhouse effect and how it contributes to climate change. I chose this topic because climate change is one of the most important issues facing our generation, yet many university students struggle to explain the basic science behind it. Terms like "greenhouse gases," "infrared radiation," and "carbon emissions" come up constantly in the news and in campus conversations, but I've noticed that most people, myself included, couldn't clearly walk through the actual mechanism of how the greenhouse effect works.</p>
+            <p>My goal is to break down this invisible atmospheric process into a simple, visual, step-by-step explanation that anyone can understand in a few minutes. The comic format works perfectly here because the greenhouse effect is inherently sequential: sunlight comes in, gets absorbed, heat gets emitted, gases trap it, the planet warms. Each step maps naturally onto a panel, making the science feel like a story rather than a lecture.</p>
+        </div>
+
+        <!-- PROTOTYPE -->
+        <h2>Comic Prototype</h2>
+
+        <div class="prototype-section">
+            <img src="prototype.png" alt="A 12-panel black and white manga-style educational comic about the greenhouse effect. Panel 1: A girl character introduces the topic. Panels 2-6: Step-by-step diagrams showing how sunlight reaches Earth, gets reflected, is re-emitted as infrared radiation, and gets trapped by greenhouse gases. Panels 7-9: The narrator asks what greenhouse gases are and shows molecular diagrams of CO2, H2O, and CH4. Panels 10-11: Diagrams showing heat staying in the atmosphere and the planet warming. Panel 12: Two characters deliver a call to action about protecting the planet from climate change.">
+            <div class="caption">Figure 1: Comic prototype &mdash; "The Greenhouse Effect" (12 panels, manga-style, black and white)</div>
+        </div>
+
+        <hr>
+
+        <!-- THE PROCESS -->
+        <h2>The Process</h2>
+
+        <!-- ==================== UNDERSTAND ==================== -->
+        <h2>Phase 1: Understand (Discover, Interpret, Specify)</h2>
+
+        <h3>Describe the Challenge</h3>
+        <p>Climate change is widely discussed but poorly understood at a mechanistic level. University students frequently encounter terms like "greenhouse effect" and "carbon emissions" in news media, social media, and campus conversations, yet many cannot explain the step-by-step process of how greenhouse gases actually trap heat in the atmosphere. This gap between awareness and understanding limits students' ability to engage meaningfully with environmental discussions, evaluate proposed solutions, or make informed decisions about sustainability in their daily lives.</p>
+
+        <h3>Context and Audience</h3>
+        <p>The primary audience for this comic is university students, typically between the ages of 18 and 25, who are taking introductory environmental science, geography, or general education courses, or who simply want to understand the science behind climate change. These students are digitally literate, accustomed to consuming information through visual media, and tend to prefer concise, engaging content over dense textbook explanations. Many of them hear about climate change daily in the news and on social media but feel unable to explain the basic mechanism behind it when asked. This creates a frustrating gap: they care about the issue but lack the scientific vocabulary and conceptual understanding to discuss it with confidence.</p>
+
+        <p>From a psychographic perspective, these students value efficiency in their learning. They want to understand concepts quickly without wading through overly technical language. Many are motivated by a genuine concern for the environment but find that their understanding is limited to surface-level talking points like "carbon is bad" and "the planet is warming" rather than actual scientific literacy about <em>why</em> these things happen. They are juggling multiple courses, part-time jobs, and social commitments, so learning materials that are visually engaging and can be consumed in a short sitting are ideal. They are also likely to share well-designed educational content with peers on social media or in group chats, which means an effective comic could reach well beyond the immediate reader.</p>
+
+        <p>A typical case might be a second-year university student who has heard the term "greenhouse effect" dozens of times and knows it has something to do with carbon dioxide and warming, but cannot explain the step-by-step mechanism of how sunlight enters the atmosphere, gets converted to heat, and gets trapped by greenhouse gases. They may confuse the greenhouse effect with the ozone layer, or think that the greenhouse effect itself is inherently bad rather than understanding that it is a natural process that has been amplified by human activity. This student would benefit from a visual, sequential explanation that builds understanding one step at a time, connecting each part of the process before introducing the next.</p>
+
+        <p>An extreme case could be a student who is deeply anxious about climate change but feels powerless because they don't understand the science well enough to have informed conversations or evaluate proposed solutions critically. Without mechanistic understanding, they may accept or reject claims about climate change based on emotion or social pressure rather than scientific reasoning. On the other end, a student who is skeptical about climate change might benefit from seeing the straightforward physics of how greenhouse gases trap heat, presented without political framing, just the science. Additionally, students with varying levels of science background must be considered. Some may have strong physics or chemistry foundations while others may have none, so the comic must be accessible without being condescending. Accessibility considerations include ensuring sufficient contrast between text and backgrounds (the black-and-white manga style naturally provides high contrast), using clear and readable fonts, structuring content in a logical sequential flow, and providing descriptive alt-text for readers using screen readers.</p>
+
+        <h3>POV Statement</h3>
+        <div class="highlight-box">
+            <p><strong>A university student</strong> with limited understanding of atmospheric science <strong>needs</strong> a clear, visual, step-by-step explanation of how the greenhouse effect works <strong>so that</strong> they can understand the mechanism behind climate change, engage meaningfully in environmental discussions, and make informed decisions about sustainability.</p>
+        </div>
+
+        <h3>Learning Objectives</h3>
+
+        <h4>Main Learning Objective</h4>
+        <p>After reading this comic, students will be able to describe the step-by-step process of the greenhouse effect, from incoming solar radiation to heat being trapped by greenhouse gases, and explain how this process connects to climate change.</p>
+
+        <h4>Sub-Learning Objectives</h4>
+        <ul>
+            <li>Students will be able to explain the difference between incoming solar radiation and outgoing infrared radiation in the context of Earth's energy balance.</li>
+            <li>Students will be able to identify the major greenhouse gases (carbon dioxide, methane, water vapor) and describe their role in trapping heat in the atmosphere.</li>
+            <li>Students will be able to explain why the greenhouse effect, while natural and necessary for life on Earth, becomes problematic when amplified by increased greenhouse gas concentrations from human activity.</li>
+            <li>Students will be able to connect the greenhouse effect to climate change and articulate why reducing greenhouse gas emissions matters for the planet's future.</li>
+        </ul>
+
+        <h4>Secret Learning Objectives</h4>
+        <ul>
+            <li>Build a sense of scientific agency by helping students feel literate enough to engage in environmental conversations and decision-making, rather than feeling excluded from the discussion.</li>
+            <li>Develop scientific literacy by demonstrating that complex atmospheric processes can be understood through accessible visual media, showing that science is not reserved for experts.</li>
+            <li>Encourage metacognitive reflection on how step-by-step visual explanations can make abstract processes easier to learn and retain, fostering an appreciation for multimedia as a learning tool.</li>
+        </ul>
+
+        <hr>
+
+        <!-- ==================== PLAN ==================== -->
+        <h2>Phase 2: Plan (Ideate, Sketch, Elaborate)</h2>
+
+        <h3>Ideation</h3>
+        <p>I brainstormed several approaches for teaching the greenhouse effect through a comic, evaluating each against the learning objectives and the multimedia design principles we've covered in EDCI 337:</p>
+
+        <div class="highlight-box">
+            <p><strong>Idea 1: Infographic-style panels.</strong> Each panel would be a labeled diagram showing one step of the greenhouse effect, similar to a textbook figure but arranged in comic panel format. This would be informative but potentially dry and passive, more like a textbook with illustrations than a true comic. Research on narrative and retention suggests that storytelling activates multiple brain regions and enhances information recall compared to bare factual presentation (Glonek &amp; King, 2014). Without a narrative thread, readers might lose interest before finishing all 12 panels. This approach would also miss the opportunity to leverage the personalization principle (Mayer), since infographic-style labels tend toward clinical, formal language.</p>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Idea 2: Anthropomorphized gas molecules as characters.</strong> CO<sub>2</sub>, methane, and water vapor molecules would be characters with distinct personalities, and the story would follow them as they trap heat. This approach has strong storytelling potential and would create emotional engagement through character development. However, it risks overcomplicating the science by attributing motivations and actions to molecules, potentially creating misconceptions. It could also increase <strong>extraneous cognitive load</strong> (Sweller) by forcing readers to track multiple characters, their personalities, and their relationships while simultaneously learning the atmospheric process. The split attention between character narrative and scientific content could undermine learning rather than support it.</p>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Idea 3: A narrator-guided walkthrough with a consistent character.</strong> A manga-style character guides the reader through the greenhouse effect step by step, with each panel showing one part of the process using clear visuals and simple captions. The character asks questions the reader might have ("What are greenhouse gases?") and provides answers, creating a conversational, approachable tone. This approach balances engagement with clarity: the character provides narrative continuity and emotional connection without overcomplicating the science. It naturally applies the <strong>personalization principle</strong> (conversational tone), the <strong>segmenting principle</strong> (one step per panel), and the <strong>contiguity principle</strong> (labels placed directly on diagrams).</p>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Idea 4: A time-travel narrative.</strong> A student travels back in time to see Earth without greenhouse gases (frozen), then to the present (comfortable), then to the future (overheated). While dramatic and emotionally compelling, this approach splits attention between the time-travel plot and the actual science, increasing extraneous cognitive load. It also requires too many panels for narrative setup (establishing the time-travel concept, introducing the character's motivation), leaving fewer panels for the actual scientific explanation. Given the 12-panel constraint, this approach would sacrifice depth of explanation for narrative complexity.</p>
+        </div>
+
+        <p>I selected <strong>Idea 3</strong> as my final direction because it best satisfies the learning objectives while keeping the comic simple, clear, and engaging. The consistent narrator character provides a storytelling thread that maintains reader interest (Glonek &amp; King, 2014) without introducing unnecessary complexity. The step-by-step panel structure maps directly onto the sequential nature of the greenhouse effect, and the conversational tone supports the personalization principle (Mayer). This approach also keeps each panel focused on a single concept, managing cognitive load through segmenting (Sweller). Comics research supports this choice: Tribull (2017) argues that sequential visual narrative is particularly effective for communicating scientific processes because it mirrors the step-by-step nature of scientific reasoning, and Morrison, Bryan, and Chilcoat (2002) found that student-generated comics enhance engagement and comprehension by giving learners ownership over the visual representation of concepts.</p>
+
+        <h3>Storyboard / Script</h3>
+        <p><em>Below is the panel-by-panel script that guided the comic's creation.</em></p>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 1 &mdash; Introduction</div>
+            <div class="scene">Scene: A girl shown from the waist up, turned to the side with a listening expression. A boy standing forward facing, pointing upwards with his right hand. Simple background.</div>
+            <div class="text-content">Text: "Let's learn about the greenhouse effect!"</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 2 &mdash; Sunlight Arrives</div>
+            <div class="scene">Scene: View from space looking down at Earth. The sun in the upper right with rays streaming down toward the planet's curved surface. Stars and dark space above, thin atmosphere visible along the horizon.</div>
+            <div class="text-content">Text: "The Sun shines down on Earth."</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 3 &mdash; Reflection and Absorption</div>
+            <div class="scene">Scene: Earth's surface and atmosphere from space. Arrows pointing down as incoming sunlight, some arrows bouncing back upward off the surface into space showing reflection. Cloud layers along the curved horizon, stars above.</div>
+            <div class="text-content">Text: "Some of the sunlight is reflected back into space." Label: "Absorption"</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 4 &mdash; Infrared Radiation</div>
+            <div class="scene">Scene: Earth's curved surface across the middle of the frame. Wavy zigzag arrows radiating upward from the surface into space, representing heat energy.</div>
+            <div class="text-content">Text: "The Earth then emits heat as infrared radiation." Label: "Infrared Radiation"</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 5 &mdash; Greenhouse Gases Trap Heat</div>
+            <div class="scene">Scene: Earth centered in the bottom of the frame. Surface at the bottom with wavy infrared arrows rising upward. A hazy band in the atmosphere representing greenhouse gases deflects some arrows back downward while a few pass through into space.</div>
+            <div class="text-content">Text: "Greenhouse gases in the atmosphere trap some of this heat."</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 6 &mdash; Heat Trapped (Visual)</div>
+            <div class="scene">Scene: Atmospheric diagram showing Earth's surface at the bottom and a cloudy gas layer above. Wavy heat arrows bouncing back and forth between the ground and the gas layer, unable to escape.</div>
+            <div class="text-content">Label: "Heat Trapped"</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 7 &mdash; Question Panel</div>
+            <div class="scene">Scene: A girl shown from the shoulders up with a curious expression, head tilted slightly, looking to the left.</div>
+            <div class="text-content">Text: "What are greenhouse gases?"</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 8 &mdash; Naming the Gases</div>
+            <div class="scene">Scene: Earth's curved surface along the bottom with wavy lines rising upward representing heat. Cloudy atmospheric sky background.</div>
+            <div class="text-content">Text: "They include carbon dioxide, methane, and water vapor."</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 9 &mdash; Molecular Diagrams</div>
+            <div class="scene">Scene: (to be added)</div>
+            <div class="text-content">Text: "CO<sub>2</sub>" / "H<sub>2</sub>O" / "CH<sub>4</sub>" (labels on diagrams)</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 10 &mdash; Heat Stays In</div>
+            <div class="scene">Scene: Atmospheric cross-section with Earth's surface along the bottom and a cloudy gas layer above. Wavy arrows rise from the surface and curve back downward off the gas layer, looping between the ground and atmosphere.</div>
+            <div class="text-content">Text: "These gases keep heat in the atmosphere." Label: "Heat Stays In"</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 11 &mdash; Planet Warming</div>
+            <div class="scene">Scene: Full view of Earth from space, centered. Wavy heat lines and a glow radiating outward from the planet's surface, representing the planet heating up.</div>
+            <div class="text-content">Text: "This warms the planet!" Label: "Warming Up!"</div>
+        </div>
+
+        <div class="panel-script">
+            <div class="panel-title">Panel 12 &mdash; Consequences and Call to Action</div>
+            <div class="scene">Scene: Wider panel. Two characters standing side by side facing the viewer with excited expressions, the girl and the boy. A duplicate of the pair is visible beside them. Behind them a landscape of melting icecaps and rising water.</div>
+            <div class="text-content">Text: "Too much warming leads to climate change... So, we need to protect our planet!"</div>
+        </div>
+
+        <h3>Theory Applied</h3>
+
+        <p>This comic is guided by several multimedia learning theories and principles covered in EDCI 337. Below, I explain each principle, how it is applied in the comic's design, and why it supports the learning objectives.</p>
+
+        <h4>Mayer's Cognitive Theory of Multimedia Learning &amp; Dual Coding</h4>
+        <p>The comic applies <strong>dual coding theory</strong> (Paivio) by pairing visual illustrations with concise text in every panel, allowing readers to process the greenhouse effect through both the visual and verbal channels simultaneously. For example, Panel 4 shows wavy lines radiating upward from the Earth (visual channel) while the caption explains "The Earth then emits heat as infrared radiation" (verbal channel). By encoding the same concept through two separate neural pathways, the reader builds a stronger, more retrievable mental representation of the process (Schnotz, 2022). This is the core of Mayer's <strong>multimedia principle</strong>: people learn more effectively from words and pictures together than from words alone. Each step of the greenhouse effect is both shown and described, ensuring that readers who are stronger in either channel can still access the content.</p>
+
+        <h4>Cognitive Load Theory: Managing Extraneous Load</h4>
+        <p><strong>Cognitive load theory</strong> (Sweller) informs several key design decisions aimed at reducing <strong>extraneous cognitive load</strong>, the mental effort wasted on poor design rather than actual learning. The <strong>coherence principle</strong> is applied by using a clean black-and-white manga art style with no unnecessary decorative elements. Every visual element in each panel serves the learning objective; there are no background details or artistic flourishes that would distract from the science. The <strong>contiguity principle</strong> is applied by placing text labels directly on or adjacent to the relevant visual element. For instance, the label "Infrared Radiation" appears right next to the heat waves in Panel 4, and "Heat Trapped" is placed directly over the trapping diagram in Panel 6. This spatial proximity eliminates the need for readers to split their attention between separated text and images, reducing the cognitive effort required to make connections. The <strong>signaling principle</strong> is used through bold labels like "Absorption," "Infrared Radiation," "CO<sub>2</sub>," "H<sub>2</sub>O," "CH<sub>4</sub>," and "Heat Stays In" that direct the reader's attention to the most important scientific concepts in each panel. These labels function as visual cues that highlight key information, preventing readers from wasting cognitive effort determining what is important.</p>
+
+        <h4>Cognitive Load Theory: Managing Intrinsic Load</h4>
+        <p><strong>Intrinsic cognitive load</strong> is managed through the <strong>segmenting principle</strong>. The greenhouse effect, which is a multi-step atmospheric process involving solar radiation, energy conversion, atmospheric chemistry, and thermal dynamics, is broken into 12 discrete panels that each cover one part of the mechanism. This chunking approach allows readers to fully process each stage before moving to the next, rather than being overwhelmed by the full complexity presented all at once. The <strong>pretraining principle</strong> is built into the comic's structure: the earlier panels (2&ndash;4) introduce foundational concepts (sunlight arriving, reflection, infrared radiation) individually before the reader encounters the more complex idea of greenhouse gases trapping heat (Panels 5&ndash;6). By Panel 9, when molecular structures and chemical formulas appear (CO<sub>2</sub>, H<sub>2</sub>O, CH<sub>4</sub>), the reader already understands what these gases do functionally, so the chemical details add depth rather than confusion. This progressive scaffolding ensures that each new concept builds on established understanding.</p>
+
+        <h4>Storytelling and Narrative Engagement</h4>
+        <p><strong>Storytelling principles</strong> are central to the comic's design, even within a simple, diagram-driven format. Research shows that narrative structure enhances information retention compared to bare factual presentation (Glonek &amp; King, 2014), and that sensory and emotional engagement during story processing activate multiple brain regions, strengthening memory encoding (Chow et al., 2014; Gonz&aacute;lez et al., 2006). The consistent narrator character provides a storytelling thread that transforms what could be a dry scientific explanation into a guided experience. The character asks questions ("What are greenhouse gases?" in Panel 7) that mirror what the reader might be wondering, creating a sense of shared inquiry and dialogue. This technique aligns with Chibana's (2015) TED storytelling technique of immersing your audience and bringing characters to life. The comic also follows a clear <strong>narrative arc</strong>: introduction (Panel 1), building understanding (Panels 2&ndash;9), complication (Panels 10&ndash;11, where warming becomes a problem), and resolution with a call to action (Panel 12). This structure incorporates several of Humm's (2025) five core story components: location (Earth and its atmosphere), action (heat being trapped), thoughts (the narrator's curiosity), and dialogue (the narrator's questions and explanations). As Tolisano emphasizes, "digital storytelling is not about creating media, it's about creating meaning."</p>
+
+        <h4>Personalization Principle</h4>
+        <p><strong>The personalization principle</strong> (Mayer) is applied through the narrator's conversational, informal tone. Rather than clinical scientific language ("Solar radiation undergoes partial albedo reflection..."), the comic uses approachable phrases like "Let's learn about the greenhouse effect!" and "This warms the planet!" Research shows that conversational language using first and second person enhances learning outcomes compared to formal academic register, because it creates a sense of social partnership between the learner and the material (Mayer). The narrator character also serves as a relatable guide, a fellow learner rather than an authority figure, which reduces the perceived social distance between the reader and the scientific content. This is particularly important given the target audience of university students who may feel intimidated by atmospheric science.</p>
+
+        <h4>Active Learning: ICAP Framework and Merrill's Principles</h4>
+        <p><strong>Active learning</strong> principles are supported through the comic's design. While a comic is primarily a consumption-based medium, it encourages engagement beyond passive receiving. Within the <strong>ICAP Framework</strong> (Chi &amp; Wylie, 2014), the comic moves readers from passive reception toward <strong>active</strong> engagement by prompting them to follow a sequential process, connect each step to the next, and build a cumulative mental model of the greenhouse effect. The question in Panel 7 ("What are greenhouse gases?") creates a moment of <strong>constructive</strong> engagement where readers naturally pause to consider what they already know before the answer is provided in Panels 8&ndash;9. The climate change framing satisfies <strong>Merrill's principle of authentic problems</strong> (2002): the greenhouse effect is not an abstract classroom exercise but a real-world issue that affects every reader's life, making the learning immediately meaningful. The early panels serve as <strong>scaffolding</strong>, building foundational understanding step by step before the more complex interactions are introduced, which reflects the active learning research finding that "complexity does not always equal better outcomes" and that the simplest approaches often work best. The final panel's call to action ("So, we need to protect our planet!") supports Merrill's <strong>integration principle</strong> by connecting new scientific knowledge to the reader's real-world behavior and decision-making, ensuring the learning extends beyond the comic itself.</p>
+
+        <h4>Universal Design for Learning (UDL) and Accessibility</h4>
+        <p><strong>Universal Design for Learning</strong> (UDL) considerations are embedded throughout the comic's design, aligned with the three UDL networks. For <strong>Recognition Networks</strong> (the "what" of learning), the comic provides multiple means of representation by presenting information through both visual diagrams and text simultaneously, supporting learners who are stronger in either the visual or verbal channel. Key concepts are highlighted through labeled diagrams, and molecular formulas (CO<sub>2</sub>, H<sub>2</sub>O, CH<sub>4</sub>) provide precise scientific notation alongside plain-language explanations. For <strong>Strategic Networks</strong> (the "how"), the sequential panel structure provides a clear, logical flow that supports executive function by guiding the reader through the process one step at a time. For <strong>Affective Networks</strong> (the "why"), the friendly narrator character and relatable topic create emotional engagement and reduce anxiety around scientific content.</p>
+
+        <p>The black-and-white manga art style naturally provides <strong>high contrast</strong> between elements, meeting WCAG accessibility guidelines without additional modification. The clean visual style with labeled diagrams ensures that the science is accessible even to readers with no prior knowledge of atmospheric science. Plain language is used throughout, avoiding unnecessary jargon. Alt-text descriptions are provided for the comic image to support screen reader users. These design choices follow the inclusive design principle of "solve for one, extend to many" (Holmes, 2020): designing for accessibility benefits all learners, not just those with specific needs. As Gernsbacher (2015) demonstrated with video captions, accessibility features originally designed for specific populations often enhance the learning experience for everyone.</p>
+
+        <hr>
+
+        <!-- ==================== GENAI ACKNOWLEDGEMENT ==================== -->
+        <h2>Generative AI Acknowledgement</h2>
+
+        <p>I acknowledge the use of <strong>Midjourney</strong> (<a href="https://www.midjourney.com/">https://www.midjourney.com/</a>) to generate the comic panel illustrations for the prototype. The prompts used for each panel correspond to the scene descriptions outlined in the Storyboard/Script section above. <strong>Adobe Photoshop</strong> was used for additional asset editing, corrections, and visual refinements to the generated images. All text, captions, labels, educational content, design documentation, and theoretical analysis are my own original work.</p>
+
+        <hr>
+
+        <!-- ==================== REFERENCES ==================== -->
+        <h2>References</h2>
+
+        <div class="references">
+            <p>Chibana, N. (2015). 7 storytelling techniques used by the most inspiring TED presenters. <em>Visme</em>.</p>
+
+            <p>Chi, M. T. H. &amp; Wylie, R. (2014). The ICAP Framework: Linking cognitive engagement to active learning outcomes. <em>Educational Psychologist</em>, 49(4), 219&ndash;243.</p>
+
+            <p>Chow, H. M., Mar, R. A., Xu, Y., Liu, S., Waber, S., &amp; Braun, A. R. (2014). Embodied comprehension of stories: Interactions between language regions and modality-specific neural systems. <em>Journal of Cognitive Neuroscience</em>, 26(2), 279&ndash;295.</p>
+
+            <p>Gernsbacher, M. A. (2015). Video captions benefit everyone. <em>Policy Insights from the Behavioral and Brain Sciences</em>, 2(1), 195&ndash;202.</p>
+
+            <p>Glonek, K. L. &amp; King, P. E. (2014). Listening to narratives: Perceived involvement and information retention. <em>International Journal of Listening</em>, 28(1), 32&ndash;46.</p>
+
+            <p>Gonz&aacute;lez, J., Barros-Loscertales, A., Pulverm&uuml;ller, F., Meseguer, V., Sanjuan, A., Belloch, V., &amp; &Aacute;vila, C. (2006). Reading cinnamon activates olfactory brain regions. <em>NeuroImage</em>, 32(2), 906&ndash;912.</p>
+
+            <p>Holmes, K. (2020). <em>Mismatch: How inclusion shapes design</em>. MIT Press.</p>
+
+            <p>Humm, A. (2025). Five core story components. EDCI 337 course materials, University of Victoria.</p>
+
+            <p>Mayer, R. E. &amp; Fiorella, L. (Eds.). (2022). <em>The Cambridge handbook of multimedia learning</em> (3rd ed.). Cambridge University Press.</p>
+
+            <p>Merrill, M. D. (2002). First Principles of Instruction. <em>Educational Technology Research and Development</em>, 50(3), 43&ndash;59.</p>
+
+            <p>Morrison, T. G., Bryan, G., &amp; Chilcoat, G. W. (2002). Using student-generated comic books in the classroom. <em>Journal of Adolescent &amp; Adult Literacy</em>, 45(8), 758&ndash;767.</p>
+
+            <p>Schnotz, W. (2022). Integrated model of text and picture comprehension. In R. E. Mayer &amp; L. Fiorella (Eds.), <em>The Cambridge handbook of multimedia learning</em> (3rd ed., pp. 83&ndash;99). Cambridge University Press.</p>
+
+            <p>Tolisano, S. R. (2015). Digital storytelling: What it is and what it is not. <em>Langwitches</em>.</p>
+
+            <p>Tribull, C. M. (2017). Sequential science: A guide to communication through comics. <em>Annals of the Entomological Society of America</em>, 110(5), 457&ndash;466.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
