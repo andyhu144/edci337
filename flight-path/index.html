@@ -9,7 +9,7 @@
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --bg: #fafafa;
+            --bg: #f8f9fa;
             --surface: #ffffff;
             --border: #e8eaed;
             --text: #1a1a2e;
@@ -20,12 +20,10 @@
             --hero-1: #0f332f;
             --hero-2: #0d9488;
             --hero-3: #5eead4;
-            --serif: 'Lora', Georgia, serif;
             --sans: 'Inter', -apple-system, system-ui, sans-serif;
             --shadow-sm: 0 1px 4px rgba(0,0,0,0.04);
             --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
             --radius: 20px;
-            --max-w: 860px;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -49,8 +47,6 @@
             color: var(--text);
             -webkit-font-smoothing: antialiased;
             line-height: 1.7;
-            background-image: radial-gradient(circle, var(--border) 0.5px, transparent 0.5px);
-            background-size: 24px 24px;
         }
 
         /* ── Progress Bar ── */
@@ -110,11 +106,7 @@
         }
 
         .sticky-nav a:hover { color: var(--text); }
-
-        .sticky-nav a.active {
-            color: var(--accent);
-            border-left-color: var(--accent);
-        }
+        .sticky-nav a.active { color: var(--accent); border-left-color: var(--accent); }
 
         /* ── Hero ── */
         .hero {
@@ -122,7 +114,6 @@
             overflow: hidden;
             padding: 100px 24px 88px;
             color: white;
-            background-image: none;
         }
 
         .hero::before {
@@ -151,7 +142,7 @@
         .hero-inner {
             position: relative;
             z-index: 1;
-            max-width: var(--max-w);
+            max-width: 1080px;
             margin: 0 auto;
         }
 
@@ -170,7 +161,6 @@
         .hero-back:hover { color: white; }
 
         .hero h1 {
-            font-family: var(--sans);
             font-size: 3em;
             font-weight: 600;
             line-height: 1.1;
@@ -200,28 +190,79 @@
             background: currentColor;
         }
 
-        /* ── Content ── */
+        /* ── Layout ── */
         .content {
-            max-width: var(--max-w);
+            max-width: 1080px;
             margin: 0 auto;
             padding: 64px 24px 80px;
         }
 
-        .section {
-            margin-bottom: 64px;
+        /* ── Two-Col Section ── */
+        .section-2col {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 48px;
+            margin-bottom: 0;
         }
 
-        .section-header {
+        .section-aside {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .section-aside .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .section-aside .section-tag {
+            font-size: 0.65em;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section-aside h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .section-body {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* ── Full-width Section ── */
+        .section-full {
+            margin-bottom: 0;
+        }
+
+        .section-full-header {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 24px;
         }
 
-        .section-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+        .section-full-header .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             background: var(--accent-soft);
             color: var(--accent);
             display: flex;
@@ -230,33 +271,103 @@
             flex-shrink: 0;
         }
 
-        .section-tag {
-            font-size: 0.68em;
+        .section-full-header .section-tag {
+            font-size: 0.65em;
             font-weight: 700;
             letter-spacing: 2.5px;
             text-transform: uppercase;
             color: var(--accent);
         }
 
-        h2 {
-            font-family: var(--sans);
-            font-size: 1.35em;
+        .section-full-header h2 {
+            font-size: 1.2em;
             font-weight: 600;
-            line-height: 1.35;
-            margin-bottom: 20px;
-            color: var(--text);
+            margin: 0;
         }
 
+        .section-full-header .header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        /* ── Island ── */
+        .island {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .island p { margin-bottom: 14px; }
+        .island p:last-child { margin-bottom: 0; }
+
         p {
-            font-size: 0.95em;
+            font-size: 0.93em;
             color: var(--text-secondary);
-            margin-bottom: 16px;
             line-height: 1.8;
         }
 
-        p strong {
+        /* ── Divider ── */
+        .divider {
+            max-width: 1080px;
+            margin: 56px auto;
+            padding: 0 24px;
+        }
+
+        .divider-line {
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── Objectives Grid ── */
+        .obj-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .obj-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s;
+            text-align: center;
+        }
+
+        .obj-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .obj-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+        }
+
+        .obj-item strong {
+            display: block;
+            font-size: 0.85em;
+            margin-bottom: 6px;
             color: var(--text);
-            font-weight: 600;
+        }
+
+        .obj-item span {
+            font-size: 0.78em;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
         /* ── Process Diagram ── */
@@ -265,16 +376,21 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 40px;
-            margin: 32px 0;
+            margin: 20px 0;
             box-shadow: var(--shadow-sm);
-            overflow: hidden;
         }
 
-        .process-header {
+        .process-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .process-side-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 32px;
+            gap: 10px;
+            margin-bottom: 24px;
         }
 
         .process-label {
@@ -290,7 +406,6 @@
             font-weight: 600;
             padding: 4px 12px;
             border-radius: 100px;
-            letter-spacing: 0.5px;
         }
 
         .process-badge.before { background: #fef3c7; color: #92400e; }
@@ -302,7 +417,6 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 8px;
-            margin-bottom: 12px;
         }
 
         .process-track::before {
@@ -310,9 +424,8 @@
             position: absolute;
             left: 28px;
             right: 28px;
-            top: 50%;
+            top: 22px;
             height: 2px;
-            transform: translateY(-50%);
         }
 
         .process-track.before::before { background: #fde68a; }
@@ -334,7 +447,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75em;
             transition: transform 0.3s;
         }
 
@@ -373,118 +485,6 @@
             white-space: nowrap;
         }
 
-        .process-compare {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 0;
-        }
-
-        .process-side {
-            padding: 0;
-        }
-
-        .process-side-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .process-connector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 0;
-        }
-
-        .process-connector svg {
-            color: var(--text-secondary);
-            opacity: 0.4;
-        }
-
-        /* ── Objectives Grid ── */
-        .obj-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin: 24px 0;
-        }
-
-        .obj-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.25s;
-        }
-
-        .obj-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .obj-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: var(--accent-soft);
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-        }
-
-        .obj-item strong {
-            display: block;
-            font-size: 0.88em;
-            margin-bottom: 4px;
-            color: var(--text);
-        }
-
-        .obj-item span {
-            font-size: 0.8em;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* ── Island ── */
-        .island {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 36px 40px;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 20px;
-        }
-
-        .island p:last-child { margin-bottom: 0; }
-
-        /* ── Divider ── */
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin: 64px 0;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .divider-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--border);
-        }
-
         /* ── Footer ── */
         .footer {
             text-align: center;
@@ -492,16 +492,20 @@
             font-size: 0.75em;
             color: var(--text-secondary);
             border-top: 1px solid var(--border);
-            background-image: none;
         }
 
-        .footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
+        .footer a { color: var(--accent); text-decoration: none; }
 
-        @media (max-width: 768px) {
-            .obj-grid { grid-template-columns: 1fr; }
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .section-2col {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .section-aside {
+                position: static;
+            }
+            .obj-grid { grid-template-columns: repeat(2, 1fr); }
             .sticky-nav { display: none; }
         }
 
@@ -509,9 +513,10 @@
             .hero h1 { font-size: 2em; }
             .hero { padding: 64px 20px 56px; }
             .content { padding: 48px 20px 60px; }
-            .island { padding: 28px 24px; }
-            .process { padding: 28px 20px; }
+            .island { padding: 24px 20px; }
+            .process { padding: 24px 16px; }
             .process-compare { grid-template-columns: 1fr; gap: 32px; }
+            .obj-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -519,7 +524,6 @@
 
 <div class="progress-bar" id="progressBar"></div>
 
-<!-- ── Sticky Nav ── -->
 <nav class="sticky-nav" id="stickyNav">
     <div class="sticky-nav-title">On this page</div>
     <a href="#background">Background</a>
@@ -547,36 +551,45 @@
 
 <div class="content">
 
-    <!-- ── Background ── -->
-    <div class="section" id="background" data-aos="fade-up" data-aos-duration="500">
-        <div class="section-header">
+    <!-- ── Background (2-col) ── -->
+    <div class="section-2col" id="background" data-aos="fade-up" data-aos-duration="500">
+        <div class="section-aside">
             <div class="section-icon">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
-            <div class="section-tag">Current Coordinates</div>
+            <span class="section-tag">Current Coordinates</span>
+            <h2>Background & Skills</h2>
         </div>
-        <h2>Background & Skills</h2>
-        <div class="island" data-aos="fade-up" data-aos-delay="50">
-            <p>I build software for a living. I run a small software company, so most of my work involves the whole process from design through deployment. A lot of it sits between frontend engineering and product design. I've built applications people use every day, and over time I've developed strong instincts for what makes an interface work and what makes people lose patience.</p>
-            <p>The problem is that most of those instincts are still informal. I can usually tell when something feels cluttered, confusing, or distracting, but I can't always explain that judgment clearly. I know when a design is asking too much from a user, or when an animation adds noise instead of helping, but I usually describe that in vague terms instead of using a real framework.</p>
-        </div>
-        <div class="island" data-aos="fade-up" data-aos-delay="100">
-            <p>That is a big reason I'm taking this course. I want a stronger theoretical foundation for decisions I already make in practice. I've learned a lot by building, testing, and fixing things, but I want to understand the cognitive side more clearly: why certain choices help people learn, why others create friction, and how to make those decisions more intentionally.</p>
-            <p>I'm also interested in the storytelling side of design. In my work, I've done some of this without really naming it. Writing onboarding flows, feature announcements, and interface copy has taught me that structure and wording matter a lot when you are trying to guide someone through something new. What I have not studied in a formal way is how narrative works in educational settings, or how storytelling can support understanding rather than just make something feel more engaging.</p>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>I build software for a living. I run a small software company, so most of my work involves the whole process from design through deployment. A lot of it sits between frontend engineering and product design. I've built applications people use every day, and over time I've developed strong instincts for what makes an interface work and what makes people lose patience.</p>
+                <p>The problem is that most of those instincts are still informal. I can usually tell when something feels cluttered, confusing, or distracting, but I can't always explain that judgment clearly. I know when a design is asking too much from a user, or when an animation adds noise instead of helping, but I usually describe that in vague terms instead of using a real framework.</p>
+            </div>
+            <div class="island" data-aos="fade-up" data-aos-delay="100">
+                <p>That is a big reason I'm taking this course. I want a stronger theoretical foundation for decisions I already make in practice. I've learned a lot by building, testing, and fixing things, but I want to understand the cognitive side more clearly: why certain choices help people learn, why others create friction, and how to make those decisions more intentionally.</p>
+                <p>I'm also interested in the storytelling side of design. In my work, I've done some of this without really naming it. Writing onboarding flows, feature announcements, and interface copy has taught me that structure and wording matter a lot when you are trying to guide someone through something new. What I have not studied in a formal way is how narrative works in educational settings, or how storytelling can support understanding rather than just make something feel more engaging.</p>
+            </div>
         </div>
     </div>
 
-    <div class="divider" data-aos="fade-up"><div class="divider-dot"></div></div>
+</div>
 
-    <!-- ── Goals ── -->
-    <div class="section" id="goals" data-aos="fade-up" data-aos-duration="500">
-        <div class="section-header">
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+
+    <!-- ── Goals (full-width) ── -->
+    <div class="section-full" id="goals" data-aos="fade-up" data-aos-duration="500">
+        <div class="section-full-header">
             <div class="section-icon">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
             </div>
-            <div class="section-tag">Mapping the Route</div>
+            <div class="header-text">
+                <span class="section-tag">Mapping the Route</span>
+                <h2>Course Objectives & Goals</h2>
+            </div>
         </div>
-        <h2>Course Objectives & Goals</h2>
+
         <div class="island" data-aos="fade-up" data-aos-delay="50">
             <p>By the end of the course, I want to be able to explain my design decisions more clearly, especially in terms of cognitive theory and multimedia learning principles. I want to understand ideas like cognitive load, dual coding, and contiguity well enough to actually use them, not just recognize them after the fact.</p>
         </div>
@@ -584,97 +597,80 @@
         <div class="obj-grid">
             <div class="obj-item" data-aos="fade-up" data-aos-delay="0">
                 <div class="obj-icon">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
                 </div>
                 <strong>Cognitive Theory</strong>
                 <span>The vocabulary to explain why a layout works, not just feel it.</span>
             </div>
             <div class="obj-item" data-aos="fade-up" data-aos-delay="60">
                 <div class="obj-icon">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                 </div>
                 <strong>Design Process</strong>
                 <span>See where structured thinking adds value to fast iteration.</span>
             </div>
             <div class="obj-item" data-aos="fade-up" data-aos-delay="120">
                 <div class="obj-icon">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
                 <strong>Storytelling</strong>
                 <span>How narrative supports learning, not just engagement.</span>
             </div>
             <div class="obj-item" data-aos="fade-up" data-aos-delay="180">
                 <div class="obj-icon">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 </div>
                 <strong>Accessibility</strong>
                 <span>UDL principles baked in from day one, not patched later.</span>
             </div>
         </div>
 
-        <!-- Process Diagram -->
         <div class="process" data-aos="fade-up" data-aos-delay="100">
             <div class="process-compare">
-                <div class="process-side">
+                <div>
                     <div class="process-side-header">
                         <div class="process-label">Current Process</div>
                         <div class="process-badge before">Now</div>
                     </div>
                     <div class="process-track before">
                         <div class="process-node">
-                            <div class="process-dot before-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
-                            </div>
+                            <div class="process-dot before-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></div>
                             <div class="process-node-label">Build</div>
                         </div>
                         <div class="process-node">
-                            <div class="process-dot before-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                            </div>
+                            <div class="process-dot before-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
                             <div class="process-node-label">Test</div>
                         </div>
                         <div class="process-node">
-                            <div class="process-dot before-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-                            </div>
+                            <div class="process-dot before-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
                             <div class="process-node-label">Iterate</div>
                         </div>
                     </div>
                 </div>
-                <div class="process-side">
+                <div>
                     <div class="process-side-header">
                         <div class="process-label">Target Process</div>
                         <div class="process-badge after">Goal</div>
                     </div>
                     <div class="process-track after">
                         <div class="process-node">
-                            <div class="process-dot new-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                            </div>
+                            <div class="process-dot new-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
                             <div class="process-node-label">Theory</div>
                         </div>
                         <div class="process-node">
-                            <div class="process-dot after-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
-                            </div>
+                            <div class="process-dot after-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></div>
                             <div class="process-node-label">Build</div>
                         </div>
                         <div class="process-node">
-                            <div class="process-dot after-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                            </div>
+                            <div class="process-dot after-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
                             <div class="process-node-label">Test</div>
                         </div>
                         <div class="process-node">
-                            <div class="process-dot new-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            </div>
+                            <div class="process-dot new-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
                             <div class="process-node-label">Reflect</div>
                         </div>
                         <div class="process-node">
-                            <div class="process-dot after-dot">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-                            </div>
+                            <div class="process-dot after-dot"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
                             <div class="process-node-label">Iterate</div>
                         </div>
                     </div>
@@ -687,24 +683,30 @@
         </div>
     </div>
 
-    <div class="divider" data-aos="fade-up"><div class="divider-dot"></div></div>
+</div>
 
-    <!-- ── Challenges ── -->
-    <div class="section" id="challenges" data-aos="fade-up" data-aos-duration="500">
-        <div class="section-header">
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+
+    <!-- ── Challenges (2-col) ── -->
+    <div class="section-2col" id="challenges" data-aos="fade-up" data-aos-duration="500">
+        <div class="section-aside">
             <div class="section-icon">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </div>
-            <div class="section-tag">Anticipating Turbulence</div>
+            <span class="section-tag">Anticipating Turbulence</span>
+            <h2>Challenges & Strategy</h2>
         </div>
-        <h2>Challenges & Strategy</h2>
-        <div class="island" data-aos="fade-up" data-aos-delay="50">
-            <p>The part I expect to find hardest is the academic side. I'm used to thinking in terms of prototypes, user feedback, and deadlines. Theory takes a different pace. It asks for more reading, more reflection, and more patience than my day-to-day work usually allows. That is probably where I will have to adjust the most.</p>
-            <p>I also know I tend to overbuild. If a project is open-ended, my instinct is to keep refining it far past the point of what was actually asked. For this course, I'll need to be more disciplined about scope and time. I want to do strong work, but I also want to focus on learning, not just producing something polished.</p>
-        </div>
-        <div class="island" data-aos="fade-up" data-aos-delay="100">
-            <p>My plan is to approach assignments the same way I would approach a real project: define the goal, do the work, and then reflect honestly on what worked and what did not. That last part is probably the skill I most need to build. I am much more comfortable moving on to the next thing than slowing down and analyzing what I just made.</p>
-            <p>This course feels useful to me because it sits right next to the problems I already deal with in my work. The difference is that I want to understand those problems more deeply and solve them with more intention.</p>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>The part I expect to find hardest is the academic side. I'm used to thinking in terms of prototypes, user feedback, and deadlines. Theory takes a different pace. It asks for more reading, more reflection, and more patience than my day-to-day work usually allows. That is probably where I will have to adjust the most.</p>
+                <p>I also know I tend to overbuild. If a project is open-ended, my instinct is to keep refining it far past the point of what was actually asked. For this course, I'll need to be more disciplined about scope and time. I want to do strong work, but I also want to focus on learning, not just producing something polished.</p>
+            </div>
+            <div class="island" data-aos="fade-up" data-aos-delay="100">
+                <p>My plan is to approach assignments the same way I would approach a real project: define the goal, do the work, and then reflect honestly on what worked and what did not. That last part is probably the skill I most need to build. I am much more comfortable moving on to the next thing than slowing down and analyzing what I just made.</p>
+                <p>This course feels useful to me because it sits right next to the problems I already deal with in my work. The difference is that I want to understand those problems more deeply and solve them with more intention.</p>
+            </div>
         </div>
     </div>
 
@@ -719,27 +721,21 @@
 <script>
     AOS.init({ once: true, offset: 60 });
 
-    // Reading progress bar
     window.addEventListener('scroll', () => {
         const h = document.documentElement;
-        const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-        document.getElementById('progressBar').style.width = pct + '%';
+        document.getElementById('progressBar').style.width =
+            (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%';
     });
 
-    // Sticky nav visibility + active state
     const nav = document.getElementById('stickyNav');
-    const sections = document.querySelectorAll('.section[id]');
+    const sections = document.querySelectorAll('[id]');
     const navLinks = nav.querySelectorAll('a');
 
     window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        // Show nav after hero
-        nav.classList.toggle('visible', scrollY > 500);
-
-        // Active section
+        nav.classList.toggle('visible', window.scrollY > 500);
         let current = '';
         sections.forEach(s => {
-            if (scrollY >= s.offsetTop - 200) current = s.id;
+            if (s.id && window.scrollY >= s.offsetTop - 200) current = s.id;
         });
         navLinks.forEach(a => {
             a.classList.toggle('active', a.getAttribute('href') === '#' + current);
