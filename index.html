@@ -5,255 +5,629 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDCI 337 | Andy Hu</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --bg: #fafafa;
+            --surface: #ffffff;
+            --border: #e5e7eb;
+            --text: #111827;
+            --text-secondary: #6b7280;
+            --accent: #059669;
+            --accent-light: #d1fae5;
+            --accent-dark: #065f46;
+            --hero-1: #064e3b;
+            --hero-2: #059669;
+            --hero-3: #34d399;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+            --radius: 16px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f1117;
+                --surface: #1a1d27;
+                --border: #2a2d3a;
+                --text: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --accent-light: #064e3b;
+                --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+                --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+            }
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
-            color: #1a1a1a;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1a5c2e 0%, #2d8a4e 50%, #3da863 100%);
-            color: white;
-            padding: 60px 20px 50px;
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 80px 24px 70px;
             text-align: center;
+            color: white;
         }
 
-        .header .course-label {
-            font-size: 0.75em;
-            font-weight: 600;
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%),
+                radial-gradient(circle at 60% 80%, rgba(255,255,255,0.06) 0%, transparent 45%);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 0.7em;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: fadeInDown 0.6s ease both;
+        }
+
+        .hero h1 {
+            font-size: 2.6em;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 14px;
+            letter-spacing: -0.3px;
+            animation: fadeInDown 0.6s ease 0.1s both;
+        }
+
+        .hero-sub {
+            font-size: 1.15em;
+            font-weight: 400;
+            opacity: 0.85;
+            animation: fadeInDown 0.6s ease 0.2s both;
+        }
+
+        .hero-meta {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            animation: fadeInDown 0.6s ease 0.3s both;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85em;
             opacity: 0.8;
+        }
+
+        /* ── Progress Bar ── */
+        .progress-section {
+            max-width: 960px;
+            margin: -30px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.5s ease 0.4s both;
+        }
+
+        .progress-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 14px;
         }
 
-        .header h1 {
-            font-size: 2.4em;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .header .subtitle {
-            font-size: 1em;
-            font-weight: 400;
-            opacity: 0.85;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 50px 20px 80px;
-        }
-
-        .section-label {
-            font-size: 0.7em;
+        .progress-label {
+            font-size: 0.8em;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #888;
-            margin-bottom: 20px;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
         }
 
-        .cards {
+        .progress-pct {
+            font-size: 1.4em;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--hero-1), var(--hero-2), var(--hero-3));
+            border-radius: 100px;
+            width: 0%;
+            animation: fillProgress 1.2s ease 0.8s forwards;
+        }
+
+        @keyframes fillProgress {
+            to { width: var(--progress); }
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .progress-stat {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+        }
+
+        .progress-stat strong {
+            color: var(--text);
+        }
+
+        /* ── Main Content ── */
+        .main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* ── Section ── */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 0.72em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--text-secondary);
+        }
+
+        .section-weight {
+            font-size: 0.72em;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+
+        /* ── Cards ── */
+        .card-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
-            margin-bottom: 50px;
+            gap: 12px;
+        }
+
+        .card-grid.cols-2 {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .card {
-            background: white;
-            border-radius: 10px;
-            padding: 28px 30px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px 24px;
             text-decoration: none;
             color: inherit;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            transition: box-shadow 0.2s, transform 0.15s;
-            border: 1px solid #e8e8e8;
+            gap: 16px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.4s ease both;
+            cursor: pointer;
         }
 
         .card:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md), 0 0 0 1px var(--accent);
             transform: translateY(-2px);
         }
 
-        .card-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
+        .card-num {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3em;
+            font-weight: 800;
+            font-size: 0.95em;
             flex-shrink: 0;
+            transition: transform 0.2s;
         }
 
-        .card-icon.green { background: #e8f5ed; }
-        .card-icon.blue { background: #e8f0fa; }
-        .card-icon.amber { background: #fef6e0; }
+        .card:hover .card-num { transform: scale(1.08); }
+
+        .card-num.emerald { background: #d1fae5; color: #065f46; }
+        .card-num.teal { background: #ccfbf1; color: #134e4a; }
+        .card-num.sky { background: #e0f2fe; color: #075985; }
+        .card-num.amber { background: #fef3c7; color: #92400e; }
+        .card-num.violet { background: #ede9fe; color: #5b21b6; }
+
+        .card-body { flex: 1; min-width: 0; }
 
         .card-title {
-            font-size: 1.05em;
+            font-size: 0.95em;
             font-weight: 700;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .card-desc {
-            font-size: 0.82em;
-            color: #777;
-            font-weight: 400;
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .card-meta {
+            font-size: 0.72em;
+            color: var(--text-secondary);
+            margin-top: 4px;
         }
 
         .card-arrow {
-            font-size: 1.2em;
-            color: #ccc;
-            transition: color 0.2s, transform 0.2s;
+            color: var(--border);
+            transition: all 0.2s;
+            flex-shrink: 0;
+            font-size: 1.1em;
         }
 
         .card:hover .card-arrow {
-            color: #2d8a4e;
-            transform: translateX(3px);
+            color: var(--accent);
+            transform: translateX(4px);
         }
 
+        /* ── Badges ── */
         .badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             font-size: 0.65em;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-left: 10px;
-            position: relative;
-            top: -1px;
+            letter-spacing: 0.8px;
+            padding: 3px 10px;
+            border-radius: 100px;
+            white-space: nowrap;
         }
 
-        .badge.done { background: #e8f5ed; color: #1a7a3a; }
-        .badge.wip { background: #fef6e0; color: #b8860b; }
-        .badge.upcoming { background: #f0f0f0; color: #888; }
+        .badge.done { background: #d1fae5; color: #065f46; }
+        .badge.wip { background: #fef3c7; color: #92400e; }
+        .badge.upcoming { background: #f1f5f9; color: #64748b; }
 
+        /* ── Divider ── */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 48px 0;
+        }
+
+        /* ── Footer ── */
         .footer {
             text-align: center;
-            padding: 30px 20px;
+            padding: 32px 24px;
             font-size: 0.78em;
-            color: #aaa;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
         }
 
-        @media (max-width: 600px) {
-            .header h1 { font-size: 1.7em; }
-            .card { padding: 20px; }
-            .card-icon { width: 40px; height: 40px; font-size: 1.1em; }
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card:nth-child(1) { animation-delay: 0.05s; }
+        .card:nth-child(2) { animation-delay: 0.10s; }
+        .card:nth-child(3) { animation-delay: 0.15s; }
+        .card:nth-child(4) { animation-delay: 0.20s; }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .hero { padding: 60px 20px 55px; }
+            .hero h1 { font-size: 1.8em; }
+            .hero-meta { gap: 12px; }
+            .card-grid.cols-2 { grid-template-columns: 1fr; }
+            .progress-stats { gap: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="course-label">EDCI 337 &mdash; Interactive &amp; Multimedia Learning</div>
-        <h1>Andy Hu</h1>
-        <div class="subtitle">University of Victoria &middot; Spring 2026</div>
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">EDCI 337</div>
+            <h1>Interactive &amp; Multimedia Learning</h1>
+            <div class="hero-sub">Exploring design thinking, storytelling, and multimedia learning theory</div>
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Andy Hu
+                </div>
+                <div class="hero-meta-item">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    University of Victoria
+                </div>
+                <div class="hero-meta-item">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Spring 2026
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container">
+    <!-- Progress -->
+    <div class="progress-section">
+        <div class="progress-card">
+            <div class="progress-header">
+                <span class="progress-label">Course Progress</span>
+                <span class="progress-pct">12%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="--progress: 12%"></div>
+            </div>
+            <div class="progress-stats">
+                <div class="progress-stat"><strong>1</strong> of 8 assignments complete</div>
+                <div class="progress-stat"><strong>8</strong> assignments &middot; <strong>100%</strong> total weight</div>
+            </div>
+        </div>
+    </div>
 
-        <div class="section-label">Multimedia Challenge: Comics (30%)</div>
-        <div class="cards">
-            <a class="card" href="comics/prototype/">
-                <div class="card-left">
-                    <div class="card-icon green">&#9998;</div>
-                    <div>
+    <div class="main">
+
+        <!-- Weekly Reflections -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Weekly Reflections</span>
+                <span class="section-weight">20%</span>
+            </div>
+            <div class="card-grid cols-2">
+                <a class="card" href="flight-path/">
+                    <div class="card-num emerald">01</div>
+                    <div class="card-body">
+                        <div class="card-title">Flight Path <span class="badge upcoming">Upcoming</span></div>
+                        <div class="card-desc">Course goals and initial learning direction</div>
+                        <div class="card-meta">5% &middot; Week 1</div>
+                    </div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+                <a class="card" href="theories/">
+                    <div class="card-num emerald">02</div>
+                    <div class="card-body">
+                        <div class="card-title">Theories of Multimedia <span class="badge upcoming">Upcoming</span></div>
+                        <div class="card-desc">Multimedia learning theory foundations</div>
+                        <div class="card-meta">5% &middot; Week 2</div>
+                    </div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+                <a class="card" href="active-learning/">
+                    <div class="card-num emerald">03</div>
+                    <div class="card-body">
+                        <div class="card-title">Models of Active Learning <span class="badge upcoming">Upcoming</span></div>
+                        <div class="card-desc">Active and interactive learning models</div>
+                        <div class="card-meta">5% &middot; Week 3</div>
+                    </div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+                <a class="card" href="accessibility/">
+                    <div class="card-num emerald">04</div>
+                    <div class="card-body">
+                        <div class="card-title">Accessibility &amp; UDL <span class="badge upcoming">Upcoming</span></div>
+                        <div class="card-desc">Universal Design for Learning principles</div>
+                        <div class="card-meta">5% &middot; Week 4</div>
+                    </div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Multimedia Critique -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Multimedia Critique</span>
+                <span class="section-weight">15%</span>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="multimedia-critique/">
+                    <div class="card-num teal">MC</div>
+                    <div class="card-body">
+                        <div class="card-title">Multimedia Critique <span class="badge upcoming">Upcoming</span></div>
+                        <div class="card-desc">Critical analysis of an existing multimedia learning resource</div>
+                        <div class="card-meta">15% &middot; Week 5</div>
+                    </div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Comics Challenge -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Multimedia Challenge: Comics</span>
+                <span class="section-weight">30%</span>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="comics/prototype/">
+                    <div class="card-num sky">P</div>
+                    <div class="card-body">
                         <div class="card-title">Prototype <span class="badge done">Done</span></div>
                         <div class="card-desc">The Greenhouse Effect &mdash; 12-panel manga-style educational comic</div>
+                        <div class="card-meta">Week 8</div>
                     </div>
-                </div>
-                <div class="card-arrow">&rarr;</div>
-            </a>
-            <a class="card" href="comics/peer-feedback/">
-                <div class="card-left">
-                    <div class="card-icon green">&#128172;</div>
-                    <div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+                <a class="card" href="comics/peer-feedback/">
+                    <div class="card-num sky">PF</div>
+                    <div class="card-body">
                         <div class="card-title">Peer Feedback <span class="badge upcoming">Upcoming</span></div>
-                        <div class="card-desc">Review and feedback on classmate prototypes</div>
+                        <div class="card-desc">Review and provide feedback on classmate comic prototypes</div>
+                        <div class="card-meta">Week 9</div>
                     </div>
-                </div>
-                <div class="card-arrow">&rarr;</div>
-            </a>
-            <a class="card" href="comics/final/">
-                <div class="card-left">
-                    <div class="card-icon green">&#10004;</div>
-                    <div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+                <a class="card" href="comics/final/">
+                    <div class="card-num sky">F</div>
+                    <div class="card-body">
                         <div class="card-title">Final Submission <span class="badge upcoming">Upcoming</span></div>
-                        <div class="card-desc">Revised comic incorporating peer feedback</div>
+                        <div class="card-desc">Revised comic incorporating peer feedback and reflection</div>
+                        <div class="card-meta">Week 10</div>
                     </div>
-                </div>
-                <div class="card-arrow">&rarr;</div>
-            </a>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+            </div>
         </div>
 
-        <div class="section-label">Multimedia Challenge: OERs &mdash; Group (30%)</div>
-        <div class="cards">
-            <a class="card" href="oer/prototype/">
-                <div class="card-left">
-                    <div class="card-icon blue">&#9998;</div>
-                    <div>
+        <!-- OER Challenge -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Multimedia Challenge: OERs &mdash; Group</span>
+                <span class="section-weight">30%</span>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="oer/prototype/">
+                    <div class="card-num violet">P</div>
+                    <div class="card-body">
                         <div class="card-title">Prototype <span class="badge upcoming">Upcoming</span></div>
-                        <div class="card-desc">Open Educational Resource prototype</div>
+                        <div class="card-desc">Open Educational Resource prototype development</div>
+                        <div class="card-meta">Week 11</div>
                     </div>
-                </div>
-                <div class="card-arrow">&rarr;</div>
-            </a>
-            <a class="card" href="oer/peer-feedback/">
-                <div class="card-left">
-                    <div class="card-icon blue">&#128172;</div>
-                    <div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+                <a class="card" href="oer/peer-feedback/">
+                    <div class="card-num violet">PF</div>
+                    <div class="card-body">
                         <div class="card-title">Peer Feedback <span class="badge upcoming">Upcoming</span></div>
                         <div class="card-desc">Review and feedback on classmate OER prototypes</div>
+                        <div class="card-meta">Week 12</div>
                     </div>
-                </div>
-                <div class="card-arrow">&rarr;</div>
-            </a>
-            <a class="card" href="oer/final/">
-                <div class="card-left">
-                    <div class="card-icon blue">&#10004;</div>
-                    <div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+                <a class="card" href="oer/final/">
+                    <div class="card-num violet">F</div>
+                    <div class="card-body">
                         <div class="card-title">Final Submission <span class="badge upcoming">Upcoming</span></div>
                         <div class="card-desc">Revised OER incorporating peer feedback</div>
+                        <div class="card-meta">Week 13</div>
                     </div>
-                </div>
-                <div class="card-arrow">&rarr;</div>
-            </a>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+            </div>
         </div>
 
-        <div class="section-label">Learning Reflection (5%)</div>
-        <div class="cards">
-            <a class="card" href="reflection/">
-                <div class="card-left">
-                    <div class="card-icon amber">&#128214;</div>
-                    <div>
+        <!-- Learning Reflection -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Learning Reflection</span>
+                <span class="section-weight">5%</span>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="reflection/">
+                    <div class="card-num amber">LR</div>
+                    <div class="card-body">
                         <div class="card-title">Reflection Report <span class="badge upcoming">Upcoming</span></div>
-                        <div class="card-desc">End-of-term learning reflection</div>
+                        <div class="card-desc">End-of-term learning reflection on course journey and growth</div>
+                        <div class="card-meta">5% &middot; Final Week</div>
                     </div>
-                </div>
-                <div class="card-arrow">&rarr;</div>
-            </a>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Course Resources -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Course Resources</span>
+            </div>
+            <div class="card-grid">
+                <a class="card" href="course-outline/">
+                    <div class="card-num" style="background:#f3f4f6;color:var(--text-secondary);">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Course Outline</div>
+                        <div class="card-desc">EDCI 337 A01 &mdash; Adrian Granchelli &mdash; Spring 2026</div>
+                        <div class="card-meta">PDF</div>
+                    </div>
+                    <div class="card-arrow">&rarr;</div>
+                </a>
+            </div>
         </div>
 
     </div>
 
-    <div class="footer">EDCI 337 &middot; University of Victoria &middot; 2026</div>
+    <div class="footer">
+        EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
+        <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
+    </div>
 
 </body>
 </html>
