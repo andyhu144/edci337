@@ -200,39 +200,6 @@
             background: currentColor;
         }
 
-        /* ── Thesis Block ── */
-        .thesis {
-            max-width: var(--max-w);
-            margin: -40px auto 0;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .thesis-inner {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 36px 40px;
-            box-shadow: var(--shadow-md);
-            text-align: center;
-        }
-
-        .thesis-inner p {
-            font-family: var(--serif);
-            font-size: 1.2em;
-            line-height: 1.65;
-            color: var(--text);
-            margin: 0;
-            font-weight: 400;
-        }
-
-        .thesis-inner p em {
-            color: var(--accent);
-            font-style: normal;
-            font-weight: 600;
-        }
-
         /* ── Content ── */
         .content {
             max-width: var(--max-w);
@@ -484,6 +451,18 @@
             line-height: 1.5;
         }
 
+        /* ── Island ── */
+        .island {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 40px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+        }
+
+        .island p:last-child { margin-bottom: 0; }
+
         /* ── Divider ── */
         .divider {
             display: flex;
@@ -530,10 +509,9 @@
             .hero h1 { font-size: 2em; }
             .hero { padding: 64px 20px 56px; }
             .content { padding: 48px 20px 60px; }
-            .thesis-inner { padding: 28px 24px; }
-            .thesis-inner p { font-size: 1.05em; }
-            .process-row { flex-direction: column; gap: 4px; }
-            .process-arrow { transform: rotate(90deg); }
+            .island { padding: 28px 24px; }
+            .process { padding: 28px 20px; }
+            .process-compare { grid-template-columns: 1fr; gap: 32px; }
         }
     </style>
 </head>
@@ -567,13 +545,6 @@
     </div>
 </div>
 
-<!-- ── Thesis ── -->
-<div class="thesis" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
-    <div class="thesis-inner">
-        <p>I know when something works. I want to understand <em>why</em> it works.</p>
-    </div>
-</div>
-
 <div class="content">
 
     <!-- ── Background ── -->
@@ -585,10 +556,14 @@
             <div class="section-tag">Current Coordinates</div>
         </div>
         <h2>Background & Skills</h2>
-        <p>I build software for a living. I run a small software company, so most of my work involves the whole process from design through deployment. A lot of it sits between frontend engineering and product design. I've built applications people use every day, and over time I've developed strong instincts for what makes an interface work and what makes people lose patience.</p>
-        <p>The problem is that most of those instincts are still informal. I can usually tell when something feels cluttered, confusing, or distracting, but I can't always explain that judgment clearly. I know when a design is asking too much from a user, or when an animation adds noise instead of helping, but I usually describe that in vague terms instead of using a real framework.</p>
-        <p>That is a big reason I'm taking this course. I want a stronger theoretical foundation for decisions I already make in practice. I've learned a lot by building, testing, and fixing things, but I want to understand the cognitive side more clearly: why certain choices help people learn, why others create friction, and how to make those decisions more intentionally.</p>
-        <p>I'm also interested in the storytelling side of design. In my work, I've done some of this without really naming it. Writing onboarding flows, feature announcements, and interface copy has taught me that structure and wording matter a lot when you are trying to guide someone through something new. What I have not studied in a formal way is how narrative works in educational settings, or how storytelling can support understanding rather than just make something feel more engaging.</p>
+        <div class="island" data-aos="fade-up" data-aos-delay="50">
+            <p>I build software for a living. I run a small software company, so most of my work involves the whole process from design through deployment. A lot of it sits between frontend engineering and product design. I've built applications people use every day, and over time I've developed strong instincts for what makes an interface work and what makes people lose patience.</p>
+            <p>The problem is that most of those instincts are still informal. I can usually tell when something feels cluttered, confusing, or distracting, but I can't always explain that judgment clearly. I know when a design is asking too much from a user, or when an animation adds noise instead of helping, but I usually describe that in vague terms instead of using a real framework.</p>
+        </div>
+        <div class="island" data-aos="fade-up" data-aos-delay="100">
+            <p>That is a big reason I'm taking this course. I want a stronger theoretical foundation for decisions I already make in practice. I've learned a lot by building, testing, and fixing things, but I want to understand the cognitive side more clearly: why certain choices help people learn, why others create friction, and how to make those decisions more intentionally.</p>
+            <p>I'm also interested in the storytelling side of design. In my work, I've done some of this without really naming it. Writing onboarding flows, feature announcements, and interface copy has taught me that structure and wording matter a lot when you are trying to guide someone through something new. What I have not studied in a formal way is how narrative works in educational settings, or how storytelling can support understanding rather than just make something feel more engaging.</p>
+        </div>
     </div>
 
     <div class="divider" data-aos="fade-up"><div class="divider-dot"></div></div>
@@ -602,7 +577,9 @@
             <div class="section-tag">Mapping the Route</div>
         </div>
         <h2>Course Objectives & Goals</h2>
-        <p>By the end of the course, I want to be able to explain my design decisions more clearly, especially in terms of cognitive theory and multimedia learning principles. I want to understand ideas like cognitive load, dual coding, and contiguity well enough to actually use them, not just recognize them after the fact.</p>
+        <div class="island" data-aos="fade-up" data-aos-delay="50">
+            <p>By the end of the course, I want to be able to explain my design decisions more clearly, especially in terms of cognitive theory and multimedia learning principles. I want to understand ideas like cognitive load, dual coding, and contiguity well enough to actually use them, not just recognize them after the fact.</p>
+        </div>
 
         <div class="obj-grid">
             <div class="obj-item" data-aos="fade-up" data-aos-delay="0">
@@ -705,7 +682,9 @@
             </div>
         </div>
 
-        <p>Another thing I want from the course is more structure. My usual process is fast and iterative: build something, test it, adjust it, and keep moving. That works well in product work, but I'm curious what a more formal design process adds to that approach. I want to see where methods like empathize, define, ideate, prototype, and test can sharpen the way I already work.</p>
+        <div class="island" data-aos="fade-up" data-aos-delay="50">
+            <p>Another thing I want from the course is more structure. My usual process is fast and iterative: build something, test it, adjust it, and keep moving. That works well in product work, but I'm curious what a more formal design process adds to that approach. I want to see where methods like empathize, define, ideate, prototype, and test can sharpen the way I already work.</p>
+        </div>
     </div>
 
     <div class="divider" data-aos="fade-up"><div class="divider-dot"></div></div>
@@ -719,10 +698,14 @@
             <div class="section-tag">Anticipating Turbulence</div>
         </div>
         <h2>Challenges & Strategy</h2>
-        <p>The part I expect to find hardest is the academic side. I'm used to thinking in terms of prototypes, user feedback, and deadlines. Theory takes a different pace. It asks for more reading, more reflection, and more patience than my day-to-day work usually allows. That is probably where I will have to adjust the most.</p>
-        <p>I also know I tend to overbuild. If a project is open-ended, my instinct is to keep refining it far past the point of what was actually asked. For this course, I'll need to be more disciplined about scope and time. I want to do strong work, but I also want to focus on learning, not just producing something polished.</p>
-        <p>My plan is to approach assignments the same way I would approach a real project: define the goal, do the work, and then reflect honestly on what worked and what did not. That last part is probably the skill I most need to build. I am much more comfortable moving on to the next thing than slowing down and analyzing what I just made.</p>
-        <p>This course feels useful to me because it sits right next to the problems I already deal with in my work. The difference is that I want to understand those problems more deeply and solve them with more intention.</p>
+        <div class="island" data-aos="fade-up" data-aos-delay="50">
+            <p>The part I expect to find hardest is the academic side. I'm used to thinking in terms of prototypes, user feedback, and deadlines. Theory takes a different pace. It asks for more reading, more reflection, and more patience than my day-to-day work usually allows. That is probably where I will have to adjust the most.</p>
+            <p>I also know I tend to overbuild. If a project is open-ended, my instinct is to keep refining it far past the point of what was actually asked. For this course, I'll need to be more disciplined about scope and time. I want to do strong work, but I also want to focus on learning, not just producing something polished.</p>
+        </div>
+        <div class="island" data-aos="fade-up" data-aos-delay="100">
+            <p>My plan is to approach assignments the same way I would approach a real project: define the goal, do the work, and then reflect honestly on what worked and what did not. That last part is probably the skill I most need to build. I am much more comfortable moving on to the next thing than slowing down and analyzing what I just made.</p>
+            <p>This course feels useful to me because it sits right next to the problems I already deal with in my work. The difference is that I want to understand those problems more deeply and solve them with more intention.</p>
+        </div>
     </div>
 
 </div>
