@@ -32,8 +32,17 @@
         .topbar-meta { font-size: 0.85em; opacity: 0.8; }
         .badge { display: inline-block; font-size: 0.65em; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); vertical-align: middle; margin-left: 8px; letter-spacing: 0.5px; }
         .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 60px 40px; text-align: center; }
-        .placeholder-icon { font-size: 3em; margin-bottom: 16px; opacity: 0.3; }
+        .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-secondary); margin-bottom: 14px; }
+        .resource-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+        .resource-link { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .resource-link:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+        .resource-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .resource-icon.assignment { background: var(--accent-light); color: var(--accent); }
+        .resource-icon.topic { background: #fef3c7; color: #d97706; }
+        .resource-link .label { font-size: 0.92em; font-weight: 500; }
+        .resource-link .sublabel { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
+        .resource-link .arrow { margin-left: auto; color: var(--text-secondary); font-size: 1.1em; }
+        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 50px 40px; text-align: center; }
         .placeholder h2 { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; color: var(--text); }
         .placeholder p { font-size: 0.9em; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
         .footer { text-align: center; padding: 32px 24px; font-size: 0.75em; color: var(--text-secondary); }
@@ -52,8 +61,17 @@
         </div>
     </div>
     <div class="main">
+        <div class="section-label">Resources</div>
+        <div class="resource-list">
+            <a class="resource-link" href="https://edtechuvic.ca/edci337/flight-path/" target="_blank">
+                <div class="resource-icon assignment"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
+                <div><div class="label">Flight Path Assignment</div><div class="sublabel">Instructions & prompts</div></div>
+                <div class="arrow">&rarr;</div>
+            </a>
+        </div>
+
+        <div class="section-label">Submission</div>
         <div class="placeholder">
-            <div class="placeholder-icon">&#x1F9ED;</div>
             <h2>Coming Soon</h2>
             <p>Course goals and initial learning direction</p>
         </div>
