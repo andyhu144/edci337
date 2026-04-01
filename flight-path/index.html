@@ -292,33 +292,22 @@
             font-weight: 600;
         }
 
-        /* ── Callout ── */
-        .callout {
-            background: var(--surface);
-            border-left: 3px solid var(--accent);
-            border-radius: 0 16px 16px 0;
-            padding: 20px 24px;
-            margin: 28px 0;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .callout p {
-            font-family: var(--serif);
-            font-style: italic;
-            font-size: 0.95em;
-            color: var(--text);
-            margin: 0;
-            line-height: 1.75;
-        }
-
         /* ── Process Diagram ── */
         .process {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 32px;
+            padding: 40px;
             margin: 32px 0;
             box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .process-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
         }
 
         .process-label {
@@ -327,60 +316,124 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--text-secondary);
-            margin-bottom: 20px;
         }
 
-        .process-row {
+        .process-badge {
+            font-size: 0.65em;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            letter-spacing: 0.5px;
+        }
+
+        .process-badge.before { background: #fef3c7; color: #92400e; }
+        .process-badge.after { background: var(--accent-soft); color: var(--accent-dark); }
+
+        .process-track {
+            position: relative;
             display: flex;
             align-items: center;
-            gap: 0;
-            flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
+            padding: 0 8px;
+            margin-bottom: 12px;
         }
 
-        .process-step {
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.82em;
-            font-weight: 500;
+        .process-track::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            right: 28px;
+            top: 50%;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+
+        .process-track.before::before { background: #fde68a; }
+        .process-track.after::before { background: var(--accent); opacity: 0.3; }
+
+        .process-node {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 1;
+        }
+
+        .process-dot {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            transition: transform 0.3s;
+        }
+
+        .process-dot:hover { transform: scale(1.12); }
+
+        .process-dot.before-dot {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #fde68a;
+        }
+
+        .process-dot.after-dot {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent-dark);
+            box-shadow: 0 2px 8px rgba(13,148,136,0.3);
+        }
+
+        .process-dot.new-dot {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent-dark);
+            box-shadow: 0 2px 8px rgba(13,148,136,0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 2px 8px rgba(13,148,136,0.3); }
+            50% { box-shadow: 0 2px 16px rgba(13,148,136,0.5); }
+        }
+
+        .process-node-label {
+            font-size: 0.72em;
+            font-weight: 600;
+            color: var(--text);
             white-space: nowrap;
         }
 
-        .process-step.current {
-            background: var(--accent-soft);
-            color: var(--accent-dark);
+        .process-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 0;
         }
 
-        .process-step.goal {
-            background: var(--accent);
-            color: white;
+        .process-side {
+            padding: 0;
         }
 
-        .process-arrow {
-            color: var(--border);
-            font-size: 0.9em;
-            padding: 0 6px;
-        }
-
-        .process-divider {
-            width: 100%;
+        .process-side-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin: 16px 0;
-            font-size: 0.7em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-secondary);
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .process-divider::before,
-        .process-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
+        .process-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 0;
+        }
+
+        .process-connector svg {
+            color: var(--text-secondary);
+            opacity: 0.4;
         }
 
         /* ── Objectives Grid ── */
@@ -533,12 +586,7 @@
         </div>
         <h2>Background & Skills</h2>
         <p>I build software for a living. I run a small software company, so most of my work involves the whole process from design through deployment. A lot of it sits between frontend engineering and product design. I've built applications people use every day, and over time I've developed strong instincts for what makes an interface work and what makes people lose patience.</p>
-
-        <div class="callout" data-aos="fade-up" data-aos-delay="100">
-            <p>I can usually tell when something feels cluttered, confusing, or distracting — but I can't always explain that judgment clearly.</p>
-        </div>
-
-        <p>The problem is that most of those instincts are still informal. I know when a design is asking too much from a user, or when an animation adds noise instead of helping, but I usually describe that in vague terms instead of using a real framework.</p>
+        <p>The problem is that most of those instincts are still informal. I can usually tell when something feels cluttered, confusing, or distracting, but I can't always explain that judgment clearly. I know when a design is asking too much from a user, or when an animation adds noise instead of helping, but I usually describe that in vague terms instead of using a real framework.</p>
         <p>That is a big reason I'm taking this course. I want a stronger theoretical foundation for decisions I already make in practice. I've learned a lot by building, testing, and fixing things, but I want to understand the cognitive side more clearly: why certain choices help people learn, why others create friction, and how to make those decisions more intentionally.</p>
         <p>I'm also interested in the storytelling side of design. In my work, I've done some of this without really naming it. Writing onboarding flows, feature announcements, and interface copy has taught me that structure and wording matter a lot when you are trying to guide someone through something new. What I have not studied in a formal way is how narrative works in educational settings, or how storytelling can support understanding rather than just make something feel more engaging.</p>
     </div>
@@ -589,25 +637,71 @@
 
         <!-- Process Diagram -->
         <div class="process" data-aos="fade-up" data-aos-delay="100">
-            <div class="process-label">How I want to evolve my workflow</div>
-            <div class="process-row">
-                <div class="process-step current">Build</div>
-                <span class="process-arrow">&rarr;</span>
-                <div class="process-step current">Test</div>
-                <span class="process-arrow">&rarr;</span>
-                <div class="process-step current">Iterate</div>
-            </div>
-            <div class="process-divider">add</div>
-            <div class="process-row">
-                <div class="process-step goal">Theory</div>
-                <span class="process-arrow">&rarr;</span>
-                <div class="process-step goal">Build</div>
-                <span class="process-arrow">&rarr;</span>
-                <div class="process-step goal">Test</div>
-                <span class="process-arrow">&rarr;</span>
-                <div class="process-step goal">Reflect</div>
-                <span class="process-arrow">&rarr;</span>
-                <div class="process-step goal">Iterate</div>
+            <div class="process-compare">
+                <div class="process-side">
+                    <div class="process-side-header">
+                        <div class="process-label">Current Process</div>
+                        <div class="process-badge before">Now</div>
+                    </div>
+                    <div class="process-track before">
+                        <div class="process-node">
+                            <div class="process-dot before-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+                            </div>
+                            <div class="process-node-label">Build</div>
+                        </div>
+                        <div class="process-node">
+                            <div class="process-dot before-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            </div>
+                            <div class="process-node-label">Test</div>
+                        </div>
+                        <div class="process-node">
+                            <div class="process-dot before-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                            </div>
+                            <div class="process-node-label">Iterate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-side">
+                    <div class="process-side-header">
+                        <div class="process-label">Target Process</div>
+                        <div class="process-badge after">Goal</div>
+                    </div>
+                    <div class="process-track after">
+                        <div class="process-node">
+                            <div class="process-dot new-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            </div>
+                            <div class="process-node-label">Theory</div>
+                        </div>
+                        <div class="process-node">
+                            <div class="process-dot after-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+                            </div>
+                            <div class="process-node-label">Build</div>
+                        </div>
+                        <div class="process-node">
+                            <div class="process-dot after-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            </div>
+                            <div class="process-node-label">Test</div>
+                        </div>
+                        <div class="process-node">
+                            <div class="process-dot new-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </div>
+                            <div class="process-node-label">Reflect</div>
+                        </div>
+                        <div class="process-node">
+                            <div class="process-dot after-dot">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                            </div>
+                            <div class="process-node-label">Iterate</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -626,12 +720,7 @@
         </div>
         <h2>Challenges & Strategy</h2>
         <p>The part I expect to find hardest is the academic side. I'm used to thinking in terms of prototypes, user feedback, and deadlines. Theory takes a different pace. It asks for more reading, more reflection, and more patience than my day-to-day work usually allows. That is probably where I will have to adjust the most.</p>
-
-        <div class="callout" data-aos="fade-up" data-aos-delay="100">
-            <p>I tend to overbuild. If a project is open-ended, my instinct is to keep refining it far past the point of what was actually asked.</p>
-        </div>
-
-        <p>For this course, I'll need to be more disciplined about scope and time. I want to do strong work, but I also want to focus on learning, not just producing something polished.</p>
+        <p>I also know I tend to overbuild. If a project is open-ended, my instinct is to keep refining it far past the point of what was actually asked. For this course, I'll need to be more disciplined about scope and time. I want to do strong work, but I also want to focus on learning, not just producing something polished.</p>
         <p>My plan is to approach assignments the same way I would approach a real project: define the goal, do the work, and then reflect honestly on what worked and what did not. That last part is probably the skill I most need to build. I am much more comfortable moving on to the next thing than slowing down and analyzing what I just made.</p>
         <p>This course feels useful to me because it sits right next to the problems I already deal with in my work. The difference is that I want to understand those problems more deeply and solve them with more intention.</p>
     </div>
