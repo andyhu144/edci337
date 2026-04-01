@@ -3,82 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Path | EDCI 337</title>
+    <title>Flight Path | EDCI 337 — Andy Hu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         :root {
-            --bg: #fafafa; --surface: #ffffff; --border: #e5e7eb;
-            --text: #111827; --text-secondary: #6b7280;
-            --accent: #0d9488; --accent-light: #ccfbf1; --accent-dark: #115e59;
-            --hero-1: #134e4a; --hero-2: #0d9488; --hero-3: #5eead4;
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08); --radius: 16px;
+            --bg: #fafafa;
+            --surface: #ffffff;
+            --border: #e8eaed;
+            --text: #1a1a2e;
+            --text-secondary: #5f6368;
+            --accent: #0d9488;
+            --accent-soft: #ccfbf1;
+            --accent-dark: #115e59;
+            --hero-1: #0f332f;
+            --hero-2: #0d9488;
+            --hero-3: #5eead4;
+            --serif: 'Lora', Georgia, serif;
+            --sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --shadow-sm: 0 1px 4px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+            --radius: 20px;
+            --max-w: 720px;
         }
+
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a;
-                --text: #f1f5f9; --text-secondary: #94a3b8; --accent-light: #134e4a;
-                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+                --bg: #0c0e14;
+                --surface: #161820;
+                --border: #252830;
+                --text: #e8eaed;
+                --text-secondary: #9aa0a6;
+                --accent-soft: #0d332e;
+                --shadow-sm: 0 1px 4px rgba(0,0,0,0.2);
+                --shadow-md: 0 4px 20px rgba(0,0,0,0.3);
             }
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        .topbar { position: relative; overflow: hidden; padding: 32px 24px 28px; color: white; }
-        .topbar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%); background-size: 200% 200%; animation: g 8s ease infinite; }
-        @keyframes g { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .topbar-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 500; margin-bottom: 16px; transition: color 0.2s; }
-        .back-link:hover { color: white; }
-        .topbar-title { font-size: 1.8em; font-weight: 600; margin-bottom: 6px; }
-        .topbar-meta { font-size: 0.85em; opacity: 0.8; }
-        .badge { display: inline-block; font-size: 0.65em; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); vertical-align: middle; margin-left: 8px; letter-spacing: 0.5px; }
-        .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-        .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-secondary); margin-bottom: 14px; }
-        .resource-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-        .resource-link { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .resource-link:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-        .resource-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .resource-icon.assignment { background: var(--accent-light); color: var(--accent); }
-        .resource-icon.topic { background: #fef3c7; color: #d97706; }
-        .resource-link .label { font-size: 0.92em; font-weight: 500; }
-        .resource-link .sublabel { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
-        .resource-link .arrow { margin-left: auto; color: var(--text-secondary); font-size: 1.1em; }
-        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 50px 40px; text-align: center; }
-        .placeholder h2 { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-        .placeholder p { font-size: 0.9em; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
-        .footer { text-align: center; padding: 32px 24px; font-size: 0.75em; color: var(--text-secondary); }
-        .footer a { color: var(--accent); text-decoration: none; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.7;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 72px 24px 64px;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, var(--hero-1) 0%, var(--hero-2) 55%, var(--hero-3) 100%);
+            background-size: 200% 200%;
+            animation: drift 10s ease infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 60%, rgba(255,255,255,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 30%, rgba(255,255,255,0.04) 0%, transparent 45%);
+        }
+
+        @keyframes drift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: var(--max-w);
+            margin: 0 auto;
+        }
+
+        .hero-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.82em;
+            font-weight: 500;
+            margin-bottom: 32px;
+            transition: color 0.2s;
+        }
+
+        .hero-back:hover { color: white; }
+
+        .hero-label {
+            font-size: 0.68em;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-family: var(--sans);
+            font-size: 2.6em;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .hero-sub {
+            font-size: 1.05em;
+            opacity: 0.75;
+            line-height: 1.6;
+            max-width: 520px;
+        }
+
+        .hero-meta {
+            margin-top: 24px;
+            display: flex;
+            gap: 20px;
+            font-size: 0.78em;
+            opacity: 0.55;
+        }
+
+        /* ── Content ── */
+        .content {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+
+        .section {
+            margin-bottom: 56px;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.68em;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-size: 1.5em;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        p {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        p strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ── Callout ── */
+        .callout {
+            background: var(--surface);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 24px 28px;
+            margin: 28px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .callout p {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1em;
+            color: var(--text);
+            margin: 0;
+            line-height: 1.75;
+        }
+
+        /* ── Objectives Grid ── */
+        .obj-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .obj-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s;
+        }
+
+        .obj-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .obj-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.85em;
+        }
+
+        .obj-text {
+            font-size: 0.88em;
+            line-height: 1.55;
+            color: var(--text);
+        }
+
+        .obj-text span {
+            display: block;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* ── Divider ── */
+        .divider {
+            width: 48px;
+            height: 2px;
+            background: var(--border);
+            margin: 56px 0;
+            border-radius: 2px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 40px 24px;
+            font-size: 0.75em;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8em; }
+            .hero { padding: 56px 20px 48px; }
+            .content { padding: 40px 20px 60px; }
+        }
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <div class="topbar-content">
-            <a class="back-link" href="../">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                Home
-            </a>
-            <div class="topbar-title">Flight Path<span class="badge">5%</span></div>
-            <div class="topbar-meta">Week 1</div>
+
+<div class="hero">
+    <div class="hero-inner" data-aos="fade-up" data-aos-duration="600">
+        <a class="hero-back" href="../">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            EDCI 337
+        </a>
+        <div class="hero-label">Week 1 &middot; 5%</div>
+        <h1>Flight Path</h1>
+        <p class="hero-sub">Where I'm coming from, where I want this course to take me, and what I expect to be hard.</p>
+        <div class="hero-meta">
+            <span>Andy Hu</span>
+            <span>January 2026</span>
         </div>
     </div>
-    <div class="main">
-        <div class="section-label">Resources</div>
-        <div class="resource-list">
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/flight-path/" target="_blank">
-                <div class="resource-icon assignment"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
-                <div><div class="label">Flight Path Assignment</div><div class="sublabel">Instructions & prompts</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
+</div>
+
+<div class="content">
+
+    <!-- ── Current Coordinates ── -->
+    <div class="section" data-aos="fade-up" data-aos-duration="500">
+        <div class="section-tag">Current Coordinates</div>
+        <h2>I build software for a living.</h2>
+        <p>I run a small software company — design, development, deployment, the full cycle. Most of my work sits at the intersection of frontend engineering and product design. I've shipped applications that real people use daily, built interfaces that had to communicate complex information clearly, and learned through a lot of trial and error what makes something click for a user and what makes them bounce.</p>
+        <p>My instincts around multimedia are strong but informal. I know when a layout feels cluttered or when an animation distracts more than it guides. I can look at a dashboard and tell you in seconds whether it respects the user's attention or wastes it. But if you asked me to <strong>name</strong> the principle behind that judgment, I'd struggle. I'd say something like "it just feels off" — which is fine when you're iterating on your own product, but not exactly a framework you can teach someone else or defend in a meeting.</p>
+        <p>That gap is why I'm here.</p>
+
+        <div class="callout" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+            <p>I've spent years learning what works. I want to understand why it works — and more importantly, why certain things don't work even when they look like they should.</p>
         </div>
 
-        <div class="section-label">Submission</div>
-        <div class="placeholder">
-            <h2>Coming Soon</h2>
-            <p>Course goals and initial learning direction</p>
+        <p>On the storytelling side, I've done some of this naturally through product content — onboarding flows, feature announcements, the kind of micro-copy that turns a confusing feature into something intuitive. But I've never formally studied narrative structure or how storytelling principles map onto educational design. That's new territory for me.</p>
+    </div>
+
+    <div class="divider" data-aos="fade-up"></div>
+
+    <!-- ── Mapping the Route ── -->
+    <div class="section" data-aos="fade-up" data-aos-duration="500">
+        <div class="section-tag">Mapping the Route</div>
+        <h2>What I want to walk away with.</h2>
+        <p>I'm not here to check a box. There are specific things I want to be able to do by the end of this course that I genuinely can't do right now:</p>
+
+        <div class="obj-grid">
+            <div class="obj-item" data-aos="fade-up" data-aos-delay="0">
+                <div class="obj-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="obj-text">
+                    <strong>Ground my design decisions in cognitive theory</strong>
+                    <span>Cognitive load, dual coding, contiguity — I want the vocabulary to explain why a layout works, not just feel it.</span>
+                </div>
+            </div>
+            <div class="obj-item" data-aos="fade-up" data-aos-delay="60">
+                <div class="obj-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <div class="obj-text">
+                    <strong>Formalize the design process</strong>
+                    <span>I'm used to building fast and iterating. I want to learn what a structured design thinking approach adds — empathize, define, ideate, prototype, test — and where it makes my current process better.</span>
+                </div>
+            </div>
+            <div class="obj-item" data-aos="fade-up" data-aos-delay="120">
+                <div class="obj-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="obj-text">
+                    <strong>Use storytelling with intention</strong>
+                    <span>Not just "make it engaging" — I want to understand why narrative works neurologically and how to structure educational content around it.</span>
+                </div>
+            </div>
+            <div class="obj-item" data-aos="fade-up" data-aos-delay="180">
+                <div class="obj-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <div class="obj-text">
+                    <strong>Build something accessible from the start</strong>
+                    <span>Accessibility has always been something I've patched in later. I want to design with UDL principles baked in from day one — not as an afterthought.</span>
+                </div>
+            </div>
+        </div>
+
+        <p>The course objectives around multimedia design principles and interactive design align directly with problems I solve every week. The difference is I want to solve them <strong>better</strong> — with the theoretical foundation that turns good instincts into repeatable methodology.</p>
+    </div>
+
+    <div class="divider" data-aos="fade-up"></div>
+
+    <!-- ── Anticipating Turbulence ── -->
+    <div class="section" data-aos="fade-up" data-aos-duration="500">
+        <div class="section-tag">Anticipating Turbulence</div>
+        <h2>Where I expect to struggle.</h2>
+        <p>Honestly? The academic framing. I think in prototypes, user feedback, and deployment cycles. My natural language is "ship it, test it, learn from it." Sitting with theory — reading about principles, reflecting on them in writing, connecting them to broader educational contexts — that's a different rhythm. It's slower. It's more deliberate. And it's not something I get to practice in my day-to-day work where speed is a competitive advantage.</p>
+
+        <p>The other thing is <strong>scope discipline</strong>. When I see a project brief, my instinct is to over-engineer it. I'll spend three days building something that was supposed to take three hours because I got pulled into making it perfect. For this course, I'll need to balance quality with time — especially juggling coursework alongside running a business. The goal isn't to build the most impressive artifact every time. It's to learn the most from each one.</p>
+
+        <p>My strategy is straightforward: treat each assignment like a client project with a real deadline. Define the scope, do the work, ship it, reflect on it. The reflection part is the muscle I need to build — I'm used to looking forward to the next thing, not sitting with what I just made and analyzing why it did or didn't work.</p>
+
+        <div class="callout" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+            <p>The biggest shift for me won't be learning the tools or building the projects — it'll be learning to slow down enough to understand the theory behind what I already do instinctively.</p>
         </div>
     </div>
-    <div class="footer">
-        EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
-        <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
-    </div>
+
+</div>
+
+<div class="footer">
+    EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
+    <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true, offset: 60 });
+</script>
+
 </body>
 </html>
