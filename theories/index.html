@@ -3,92 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theories of Multimedia Learning | EDCI 337</title>
+    <title>Theories of Multimedia Learning | EDCI 337 — Andy Hu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         :root {
-            --bg: #fafafa; --surface: #ffffff; --border: #e5e7eb;
-            --text: #111827; --text-secondary: #6b7280;
-            --accent: #0d9488; --accent-light: #ccfbf1; --accent-dark: #115e59;
-            --hero-1: #134e4a; --hero-2: #0d9488; --hero-3: #5eead4;
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08); --radius: 16px;
+            --bg: #f8f9fa; --surface: #ffffff; --border: #e8eaed;
+            --text: #1a1a2e; --text-secondary: #5f6368;
+            --accent: #0d9488; --accent-soft: #ccfbf1; --accent-dark: #115e59;
+            --hero-1: #0f332f; --hero-2: #0d9488; --hero-3: #5eead4;
+            --sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --shadow-sm: 0 1px 4px rgba(0,0,0,0.04); --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+            --radius: 20px;
         }
         @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a;
-                --text: #f1f5f9; --text-secondary: #94a3b8; --accent-light: #134e4a;
-                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-            }
+            :root { --bg: #0c0e14; --surface: #161820; --border: #252830; --text: #e8eaed; --text-secondary: #9aa0a6; --accent-soft: #0d332e; --shadow-sm: 0 1px 4px rgba(0,0,0,0.2); --shadow-md: 0 4px 20px rgba(0,0,0,0.3); }
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        .topbar { position: relative; overflow: hidden; padding: 32px 24px 28px; color: white; }
-        .topbar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%); background-size: 200% 200%; animation: g 8s ease infinite; }
-        @keyframes g { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .topbar-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 500; margin-bottom: 16px; transition: color 0.2s; }
-        .back-link:hover { color: white; }
-        .topbar-title { font-size: 1.8em; font-weight: 600; margin-bottom: 6px; }
-        .topbar-meta { font-size: 0.85em; opacity: 0.8; }
-        .badge { display: inline-block; font-size: 0.65em; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); vertical-align: middle; margin-left: 8px; letter-spacing: 0.5px; }
-        .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-        .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-secondary); margin-bottom: 14px; }
-        .resource-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-        .resource-link { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .resource-link:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-        .resource-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .resource-icon.assignment { background: var(--accent-light); color: var(--accent); }
-        .resource-icon.topic { background: #fef3c7; color: #d97706; }
-        .resource-link .label { font-size: 0.92em; font-weight: 500; }
-        .resource-link .sublabel { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
-        .resource-link .arrow { margin-left: auto; color: var(--text-secondary); font-size: 1.1em; }
-        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 50px 40px; text-align: center; }
-        .placeholder h2 { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-        .placeholder p { font-size: 0.9em; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
-        .footer { text-align: center; padding: 32px 24px; font-size: 0.75em; color: var(--text-secondary); }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 1000; width: 0%; transition: width 0.1s linear; }
+        .sticky-nav { position: fixed; top: 24px; right: 24px; z-index: 100; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; box-shadow: var(--shadow-md); font-size: 0.75em; opacity: 0; transform: translateY(-8px); transition: all 0.3s ease; pointer-events: none; }
+        .sticky-nav.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .sticky-nav-title { font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85em; color: var(--text-secondary); margin-bottom: 10px; }
+        .sticky-nav a { display: block; padding: 5px 0; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; border-left: 2px solid transparent; padding-left: 10px; }
+        .sticky-nav a:hover { color: var(--text); }
+        .sticky-nav a.active { color: var(--accent); border-left-color: var(--accent); }
+        .hero { position: relative; overflow: hidden; padding: 100px 24px 88px; color: white; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, var(--hero-1) 0%, var(--hero-2) 55%, var(--hero-3) 100%); background-size: 200% 200%; animation: drift 10s ease infinite; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 25% 60%, rgba(255,255,255,0.07) 0%, transparent 55%), radial-gradient(ellipse at 75% 30%, rgba(255,255,255,0.04) 0%, transparent 45%); }
+        @keyframes drift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .hero-inner { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+        .hero-back { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.82em; font-weight: 500; margin-bottom: 48px; transition: color 0.2s; }
+        .hero-back:hover { color: white; }
+        .hero h1 { font-size: 3em; font-weight: 600; line-height: 1.1; margin-bottom: 40px; }
+        .hero-footer { display: flex; align-items: center; gap: 16px; font-size: 0.8em; opacity: 0.5; }
+        .hero-footer .pill { background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); padding: 5px 14px; border-radius: 100px; font-weight: 500; }
+        .hero-footer .dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+        .content { max-width: 1080px; margin: 0 auto; padding: 64px 24px 80px; }
+        .section-2col { display: grid; grid-template-columns: 240px 1fr; gap: 48px; }
+        .section-aside { position: sticky; top: 100px; align-self: start; }
+        .section-aside .section-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+        .section-aside .section-tag { font-size: 0.65em; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
+        .section-aside h2 { font-size: 1.2em; font-weight: 600; line-height: 1.3; color: var(--text); margin: 0; }
+        .section-body { display: flex; flex-direction: column; gap: 16px; }
+        .section-full-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .section-full-header .section-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .section-full-header .section-tag { font-size: 0.65em; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); }
+        .section-full-header h2 { font-size: 1.2em; font-weight: 600; margin: 0; }
+        .section-full-header .header-text { display: flex; flex-direction: column; gap: 4px; }
+        .island { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 36px; box-shadow: var(--shadow-sm); }
+        .island p { margin-bottom: 14px; font-size: 0.93em; color: var(--text-secondary); line-height: 1.8; }
+        .island p:last-child { margin-bottom: 0; }
+        p { font-size: 0.93em; color: var(--text-secondary); line-height: 1.8; }
+        .divider { max-width: 1080px; margin: 56px auto; padding: 0 24px; }
+        .divider-line { height: 1px; background: var(--border); }
+        .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+        .pcard { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px 20px; box-shadow: var(--shadow-sm); transition: all 0.25s; text-align: center; }
+        .pcard:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .pcard .pi { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 0.8em; font-weight: 700; }
+        .pcard .pi.ext { background: #fef3c7; color: #92400e; }
+        .pcard .pi.int { background: #dbeafe; color: #1e40af; }
+        .pcard strong { display: block; font-size: 0.85em; margin-bottom: 6px; color: var(--text); }
+        .pcard span { font-size: 0.78em; color: var(--text-secondary); line-height: 1.5; }
+        .ref-list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow-sm); }
+        .ref-list h3 { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-bottom: 16px; }
+        .ref-list p { font-size: 0.82em; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.6; }
+        .ref-list a { color: var(--accent); text-decoration: none; }
+        .footer { text-align: center; padding: 40px 24px; font-size: 0.75em; color: var(--text-secondary); border-top: 1px solid var(--border); }
         .footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 900px) { .section-2col { grid-template-columns: 1fr; gap: 24px; } .section-aside { position: static; } .pgrid { grid-template-columns: repeat(2, 1fr); } .sticky-nav { display: none; } }
+        @media (max-width: 600px) { .hero h1 { font-size: 2em; } .hero { padding: 64px 20px 56px; } .content { padding: 48px 20px 60px; } .island { padding: 24px 20px; } .pgrid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <div class="topbar-content">
-            <a class="back-link" href="../">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                Home
-            </a>
-            <div class="topbar-title">Theories of Multimedia Learning<span class="badge">5%</span></div>
-            <div class="topbar-meta">Week 2</div>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="sticky-nav" id="stickyNav">
+    <div class="sticky-nav-title">On this page</div>
+    <a href="#foundations">Foundations</a>
+    <a href="#principles">Principles</a>
+    <a href="#application">Application</a>
+    <a href="#references">References</a>
+</nav>
+
+<div class="hero">
+    <div class="hero-inner" data-aos="fade-up" data-aos-duration="600">
+        <a class="hero-back" href="../"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> EDCI 337</a>
+        <h1>Theories of Multimedia Learning</h1>
+        <div class="hero-footer">
+            <span>Andy Hu</span><span class="dot"></span><span>January 2026</span><span class="dot"></span><span class="pill">Week 2 &middot; 5%</span>
         </div>
     </div>
-    <div class="main">
-        <div class="section-label">Resources</div>
-        <div class="resource-list">
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/weekly-goals-reflections/" target="_blank">
-                <div class="resource-icon assignment"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
-                <div><div class="label">Substantive Posts</div><div class="sublabel">Instructions & rubric</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/2025/09/05/theories-of-multimedia-learning/" target="_blank">
-                <div class="resource-icon topic"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                <div><div class="label">Theories of Multimedia Learning</div><div class="sublabel">Mayer, cognitive load, dual coding</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/2025/09/11/text-and-image-the-sum-is-greater-than-its-parts/" target="_blank">
-                <div class="resource-icon topic"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                <div><div class="label">Text and Image</div><div class="sublabel">The sum is greater than its parts</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
+</div>
+
+<div class="content">
+    <div class="section-2col" id="foundations" data-aos="fade-up">
+        <div class="section-aside">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <span class="section-tag">Cognitive Foundations</span>
+            <h2>Why Multimedia Works (and Fails)</h2>
+        </div>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>Before this week, if someone asked me why a particular interface worked well, I would have described it in terms of feel. Clean, intuitive, easy to scan. Those are real observations, but they are not explanations. Mayer's Cognitive Theory of Multimedia Learning gives a framework for understanding what is actually happening when someone processes a screen, a video, or any combination of words and images.</p>
+                <p>The theory rests on three ideas that are hard to argue with. First, working memory has limited capacity — Sweller's cognitive load theory. Second, the brain processes verbal and visual information through separate channels — Paivio's dual coding theory. Third, learning is not passive reception. People actively filter, select, organize, and integrate information into what they already know.</p>
+            </div>
+            <div class="island" data-aos="fade-up" data-aos-delay="100">
+                <p>What surprised me is how directly this maps to product design. When I build a dashboard, I am constantly making decisions about how much information to show at once, whether to use a label or an icon, whether a tooltip helps or adds friction. I have been solving cognitive load problems without knowing that is what I was doing. The difference now is that I have terminology for it — and a set of principles I can use to make these decisions more deliberately instead of relying on instinct alone.</p>
+                <p>The dual coding part was intuitive. I have always known that a diagram with a spoken explanation works better than a diagram with a paragraph of text overlaid on it. What I did not know is that the modality principle — narration plus visuals outperforming text plus visuals — has the strongest empirical support of any of Mayer's principles (Mayer, 2022). That is useful information when making decisions about documentation formats.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div id="principles" data-aos="fade-up">
+        <div class="section-full-header">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+            <div class="header-text">
+                <span class="section-tag">Mayer's Principles</span>
+                <h2>Reducing &amp; Managing Cognitive Load</h2>
+            </div>
         </div>
 
-        <div class="section-label">Submission</div>
-        <div class="placeholder">
-            <h2>Coming Soon</h2>
-            <p>Substantive post on multimedia learning theory</p>
+        <div class="island" data-aos="fade-up" data-aos-delay="50" style="margin-bottom: 20px;">
+            <p>The principles split into two groups: reducing extraneous load (removing noise) and managing intrinsic load (structuring complexity). Both translate directly to interface design decisions I make regularly.</p>
+        </div>
+
+        <div class="pgrid">
+            <div class="pcard" data-aos="fade-up" data-aos-delay="0"><div class="pi ext">R</div><strong>Redundancy</strong><span>Do not repeat the same information across channels simultaneously.</span></div>
+            <div class="pcard" data-aos="fade-up" data-aos-delay="50"><div class="pi ext">C</div><strong>Coherence</strong><span>Cut anything that does not directly serve the learning objective.</span></div>
+            <div class="pcard" data-aos="fade-up" data-aos-delay="100"><div class="pi ext">S</div><strong>Signaling</strong><span>Use headings and visual cues to direct attention to what matters.</span></div>
+            <div class="pcard" data-aos="fade-up" data-aos-delay="150"><div class="pi ext">CT</div><strong>Contiguity</strong><span>Keep related words and images close in space and time.</span></div>
+            <div class="pcard" data-aos="fade-up" data-aos-delay="0"><div class="pi int">SG</div><strong>Segmenting</strong><span>Break complex content into smaller, self-paced chunks.</span></div>
+            <div class="pcard" data-aos="fade-up" data-aos-delay="50"><div class="pi int">PT</div><strong>Pretraining</strong><span>Introduce terminology before the main material.</span></div>
+            <div class="pcard" data-aos="fade-up" data-aos-delay="100"><div class="pi int">M</div><strong>Modality</strong><span>Narration + visuals outperforms text + visuals. Strongest evidence.</span></div>
+            <div class="pcard" data-aos="fade-up" data-aos-delay="150"><div class="pi int">P</div><strong>Personalization</strong><span>Conversational language produces better learning than formal prose.</span></div>
         </div>
     </div>
-    <div class="footer">
-        EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
-        <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div class="section-2col" id="application" data-aos="fade-up">
+        <div class="section-aside">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <span class="section-tag">Connecting to Practice</span>
+            <h2>What This Changes</h2>
+        </div>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>The most useful realization from this week is that these principles work as a diagnostic checklist. When something I have built feels wrong but I cannot pinpoint why, I can run through the principles and usually find the problem. Is the layout violating contiguity by separating a chart from its explanation? Is there redundant information across channels? Is the content hitting the user with everything at once without segmenting?</p>
+                <p>I also notice that social media platforms have internalized these principles whether they know the theory or not. Instagram's single-image focus applies coherence. YouTube's chapter markers apply segmenting. Twitter's character limit is a crude form of coherence enforcement. These platforms optimized for attention through trial and error, and the principles explain why their choices work.</p>
+            </div>
+            <div class="island" data-aos="fade-up" data-aos-delay="100">
+                <p>Going forward, I want to apply the modality principle more deliberately in my product work. We currently default to text-heavy documentation, and the research strongly suggests that narrated screen recordings would be more effective for complex features. That is a concrete change I can make based on what I learned this week.</p>
+                <p>The contiguity principle also has immediate implications for how I design form validation. Right now, error messages appear at the top of the form, separated from the field that caused the error. That is a textbook contiguity violation. Moving validation inline, next to the relevant field, would reduce the cognitive effort required to understand and fix the problem. I knew this intuitively. Now I know why it works and can articulate it to my team.</p>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div class="ref-list" id="references" data-aos="fade-up">
+        <h3>References</h3>
+        <p>Mayer, R. E. (Ed.). (2022). <em>The Cambridge handbook of multimedia learning</em> (3rd ed.). Cambridge University Press.</p>
+        <p>Schnotz, W. (2022). Integrated model of text and picture comprehension. In R. E. Mayer & L. Fiorella (Eds.), <em>The Cambridge handbook of multimedia learning</em> (3rd ed., pp. 83–99). Cambridge University Press.</p>
+        <p>Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. <em>Cognitive Science, 12</em>(2), 257–285.</p>
+        <p>Paivio, A. (1986). <em>Mental representations: A dual coding approach</em>. Oxford University Press.</p>
+        <p>Loveless, B. (2023). Dual coding theory: The complete guide for teachers. <em>Education Corner</em>. <a href="https://www.educationcorner.com/dual-coding-theory/">educationcorner.com</a></p>
+        <p>Vanderbilt University Center for Teaching. (n.d.). Effective educational videos. <a href="https://cft.vanderbilt.edu/guides-sub-pages/effective-educational-videos/">cft.vanderbilt.edu</a></p>
+        <p>Yousman, B. (2015). The text and the image. In J. Frechette & R. Williams (Eds.), <em>Media education for a digital generation</em> (pp. 157–170). Routledge.</p>
+    </div>
+</div>
+
+<div class="footer">EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026<br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a></div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true, offset: 60 });
+    window.addEventListener('scroll', () => { const h = document.documentElement; document.getElementById('progressBar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%'; });
+    const nav = document.getElementById('stickyNav'), sections = document.querySelectorAll('[id]'), navLinks = nav.querySelectorAll('a');
+    window.addEventListener('scroll', () => { nav.classList.toggle('visible', window.scrollY > 500); let c = ''; sections.forEach(s => { if (s.id && window.scrollY >= s.offsetTop - 200) c = s.id; }); navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + c); }); });
+</script>
 </body>
 </html>

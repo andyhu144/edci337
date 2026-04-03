@@ -3,87 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessibility & UDL | EDCI 337</title>
+    <title>Accessibility & UDL | EDCI 337 — Andy Hu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         :root {
-            --bg: #fafafa; --surface: #ffffff; --border: #e5e7eb;
-            --text: #111827; --text-secondary: #6b7280;
-            --accent: #0d9488; --accent-light: #ccfbf1; --accent-dark: #115e59;
-            --hero-1: #134e4a; --hero-2: #0d9488; --hero-3: #5eead4;
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08); --radius: 16px;
+            --bg: #f8f9fa; --surface: #ffffff; --border: #e8eaed;
+            --text: #1a1a2e; --text-secondary: #5f6368;
+            --accent: #0d9488; --accent-soft: #ccfbf1; --accent-dark: #115e59;
+            --hero-1: #0f332f; --hero-2: #0d9488; --hero-3: #5eead4;
+            --sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --shadow-sm: 0 1px 4px rgba(0,0,0,0.04); --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+            --radius: 20px;
         }
         @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a;
-                --text: #f1f5f9; --text-secondary: #94a3b8; --accent-light: #134e4a;
-                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-            }
+            :root { --bg: #0c0e14; --surface: #161820; --border: #252830; --text: #e8eaed; --text-secondary: #9aa0a6; --accent-soft: #0d332e; --shadow-sm: 0 1px 4px rgba(0,0,0,0.2); --shadow-md: 0 4px 20px rgba(0,0,0,0.3); }
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        .topbar { position: relative; overflow: hidden; padding: 32px 24px 28px; color: white; }
-        .topbar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%); background-size: 200% 200%; animation: g 8s ease infinite; }
-        @keyframes g { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .topbar-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 500; margin-bottom: 16px; transition: color 0.2s; }
-        .back-link:hover { color: white; }
-        .topbar-title { font-size: 1.8em; font-weight: 600; margin-bottom: 6px; }
-        .topbar-meta { font-size: 0.85em; opacity: 0.8; }
-        .badge { display: inline-block; font-size: 0.65em; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); vertical-align: middle; margin-left: 8px; letter-spacing: 0.5px; }
-        .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-        .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-secondary); margin-bottom: 14px; }
-        .resource-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-        .resource-link { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .resource-link:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-        .resource-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .resource-icon.assignment { background: var(--accent-light); color: var(--accent); }
-        .resource-icon.topic { background: #fef3c7; color: #d97706; }
-        .resource-link .label { font-size: 0.92em; font-weight: 500; }
-        .resource-link .sublabel { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
-        .resource-link .arrow { margin-left: auto; color: var(--text-secondary); font-size: 1.1em; }
-        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 50px 40px; text-align: center; }
-        .placeholder h2 { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-        .placeholder p { font-size: 0.9em; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
-        .footer { text-align: center; padding: 32px 24px; font-size: 0.75em; color: var(--text-secondary); }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 1000; width: 0%; transition: width 0.1s linear; }
+        .sticky-nav { position: fixed; top: 24px; right: 24px; z-index: 100; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; box-shadow: var(--shadow-md); font-size: 0.75em; opacity: 0; transform: translateY(-8px); transition: all 0.3s ease; pointer-events: none; }
+        .sticky-nav.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .sticky-nav-title { font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85em; color: var(--text-secondary); margin-bottom: 10px; }
+        .sticky-nav a { display: block; padding: 5px 0; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; border-left: 2px solid transparent; padding-left: 10px; }
+        .sticky-nav a:hover { color: var(--text); }
+        .sticky-nav a.active { color: var(--accent); border-left-color: var(--accent); }
+        .hero { position: relative; overflow: hidden; padding: 100px 24px 88px; color: white; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, var(--hero-1) 0%, var(--hero-2) 55%, var(--hero-3) 100%); background-size: 200% 200%; animation: drift 10s ease infinite; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 25% 60%, rgba(255,255,255,0.07) 0%, transparent 55%), radial-gradient(ellipse at 75% 30%, rgba(255,255,255,0.04) 0%, transparent 45%); }
+        @keyframes drift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .hero-inner { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+        .hero-back { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.82em; font-weight: 500; margin-bottom: 48px; transition: color 0.2s; }
+        .hero-back:hover { color: white; }
+        .hero h1 { font-size: 3em; font-weight: 600; line-height: 1.1; margin-bottom: 40px; }
+        .hero-footer { display: flex; align-items: center; gap: 16px; font-size: 0.8em; opacity: 0.5; }
+        .hero-footer .pill { background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); padding: 5px 14px; border-radius: 100px; font-weight: 500; }
+        .hero-footer .dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+        .content { max-width: 1080px; margin: 0 auto; padding: 64px 24px 80px; }
+        .section-2col { display: grid; grid-template-columns: 240px 1fr; gap: 48px; }
+        .section-aside { position: sticky; top: 100px; align-self: start; }
+        .section-aside .section-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+        .section-aside .section-tag { font-size: 0.65em; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
+        .section-aside h2 { font-size: 1.2em; font-weight: 600; line-height: 1.3; color: var(--text); margin: 0; }
+        .section-body { display: flex; flex-direction: column; gap: 16px; }
+        .section-full-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .section-full-header .section-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .section-full-header .section-tag { font-size: 0.65em; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); }
+        .section-full-header h2 { font-size: 1.2em; font-weight: 600; margin: 0; }
+        .section-full-header .header-text { display: flex; flex-direction: column; gap: 4px; }
+        .island { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 36px; box-shadow: var(--shadow-sm); }
+        .island p { margin-bottom: 14px; font-size: 0.93em; color: var(--text-secondary); line-height: 1.8; }
+        .island p:last-child { margin-bottom: 0; }
+        p { font-size: 0.93em; color: var(--text-secondary); line-height: 1.8; }
+        .divider { max-width: 1080px; margin: 56px auto; padding: 0 24px; }
+        .divider-line { height: 1px; background: var(--border); }
+        /* UDL 3-col */
+        .udl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+        .udl-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow-sm); transition: all 0.25s; }
+        .udl-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .udl-card .u-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+        .udl-card .u-icon.engage { background: #fef3c7; color: #92400e; }
+        .udl-card .u-icon.represent { background: #dbeafe; color: #1e40af; }
+        .udl-card .u-icon.action { background: var(--accent-soft); color: var(--accent-dark); }
+        .udl-card .u-network { font-size: 0.65em; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+        .udl-card .u-network.engage { color: #92400e; }
+        .udl-card .u-network.represent { color: #1e40af; }
+        .udl-card .u-network.action { color: var(--accent-dark); }
+        .udl-card strong { display: block; font-size: 1em; margin-bottom: 8px; color: var(--text); }
+        .udl-card ul { list-style: none; padding: 0; }
+        .udl-card li { font-size: 0.82em; color: var(--text-secondary); padding: 4px 0; padding-left: 16px; position: relative; line-height: 1.5; }
+        .udl-card li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; }
+        .udl-card.engage li::before { background: #fde68a; }
+        .udl-card.represent li::before { background: #93c5fd; }
+        .udl-card.action li::before { background: var(--accent); opacity: 0.5; }
+        /* Inclusive design principles */
+        .id-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+        .id-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.25s; }
+        .id-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .id-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 0.8em; font-weight: 700; }
+        .id-card strong { display: block; font-size: 0.88em; margin-bottom: 6px; color: var(--text); }
+        .id-card span { font-size: 0.78em; color: var(--text-secondary); line-height: 1.5; }
+        .ref-list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow-sm); }
+        .ref-list h3 { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-bottom: 16px; }
+        .ref-list p { font-size: 0.82em; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.6; }
+        .ref-list a { color: var(--accent); text-decoration: none; }
+        .footer { text-align: center; padding: 40px 24px; font-size: 0.75em; color: var(--text-secondary); border-top: 1px solid var(--border); }
         .footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 900px) { .section-2col { grid-template-columns: 1fr; gap: 24px; } .section-aside { position: static; } .udl-grid, .id-grid { grid-template-columns: 1fr; } .sticky-nav { display: none; } }
+        @media (max-width: 600px) { .hero h1 { font-size: 2em; } .hero { padding: 64px 20px 56px; } .content { padding: 48px 20px 60px; } .island { padding: 24px 20px; } }
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <div class="topbar-content">
-            <a class="back-link" href="../">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                Home
-            </a>
-            <div class="topbar-title">Accessibility & UDL<span class="badge">5%</span></div>
-            <div class="topbar-meta">Week 4</div>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="sticky-nav" id="stickyNav">
+    <div class="sticky-nav-title">On this page</div>
+    <a href="#reframing">Reframing</a>
+    <a href="#inclusive">Inclusive Design</a>
+    <a href="#udl">UDL Framework</a>
+    <a href="#practice">In Practice</a>
+    <a href="#references">References</a>
+</nav>
+
+<div class="hero">
+    <div class="hero-inner" data-aos="fade-up" data-aos-duration="600">
+        <a class="hero-back" href="../"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> EDCI 337</a>
+        <h1>Accessibility &amp; Universal Design for Learning</h1>
+        <div class="hero-footer">
+            <span>Andy Hu</span><span class="dot"></span><span>January 2026</span><span class="dot"></span><span class="pill">Week 4 &middot; 5%</span>
         </div>
     </div>
-    <div class="main">
-        <div class="section-label">Resources</div>
-        <div class="resource-list">
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/weekly-goals-reflections/" target="_blank">
-                <div class="resource-icon assignment"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
-                <div><div class="label">Substantive Posts</div><div class="sublabel">Instructions & rubric</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/2025/11/02/accessible-multimedia/" target="_blank">
-                <div class="resource-icon topic"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                <div><div class="label">Accessible Multimedia</div><div class="sublabel">UDL, WCAG, inclusive design</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
+</div>
+
+<div class="content">
+    <div class="section-2col" id="reframing" data-aos="fade-up">
+        <div class="section-aside">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <span class="section-tag">Reframing the Problem</span>
+            <h2>Disability Is a Design Failure</h2>
+        </div>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>In software, I have always thought of accessibility as a compliance checklist. Add alt text, check contrast ratios, make sure the tab order is logical, run an audit, fix the flagged items. It is not that I considered it unimportant — it is that I treated it as a layer to apply at the end rather than a lens to design through from the beginning.</p>
+                <p>Kat Holmes reframes this completely: "Disability is a mismatch between a person's abilities and their environment" (Holmes, 2020). That shifts the responsibility from the user to the designer. If someone cannot use what I built, that is not their limitation. It is mine. I built an environment that excludes them. That framing changes how I think about every design decision.</p>
+            </div>
+            <div class="island" data-aos="fade-up" data-aos-delay="100">
+                <p>The practical implication is that accessibility features almost always benefit everyone, not just the people they were originally designed for. Captions help hearing-impaired users, but they also help someone watching a video in a noisy room, someone learning in a second language, and someone who processes written information faster than spoken. Gernsbacher (2015) found that captions improve comprehension, attention, and memory across all viewers. That is the argument that should end any debate about whether captions are "worth the effort."</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div id="inclusive" data-aos="fade-up">
+        <div class="section-full-header">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="header-text">
+                <span class="section-tag">Holmes (2020)</span>
+                <h2>Three Inclusive Design Principles</h2>
+            </div>
         </div>
 
-        <div class="section-label">Submission</div>
-        <div class="placeholder">
-            <h2>Coming Soon</h2>
-            <p>Substantive post on Universal Design for Learning</p>
+        <div class="id-grid">
+            <div class="id-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="id-num">1</div>
+                <strong>Recognize Exclusion</strong>
+                <span>Identify who your design choices leave out. Every design decision includes some people and excludes others.</span>
+            </div>
+            <div class="id-card" data-aos="fade-up" data-aos-delay="60">
+                <div class="id-num">2</div>
+                <strong>Solve for One, Extend to Many</strong>
+                <span>A solution designed for someone with a permanent disability often benefits people with temporary or situational limitations.</span>
+            </div>
+            <div class="id-card" data-aos="fade-up" data-aos-delay="120">
+                <div class="id-num">3</div>
+                <strong>Learn from Diversity</strong>
+                <span>Include people who have already adapted to non-inclusive environments. They have insights that typical usability testing misses.</span>
+            </div>
+        </div>
+
+        <div class="island" data-aos="fade-up" data-aos-delay="50">
+            <p>The second principle — solve for one, extend to many — is the one that resonates most with my work. When I build a high-contrast mode for a visually impaired user, it also helps someone using their laptop in direct sunlight. When I add keyboard navigation for a user who cannot use a mouse, it also helps a power user who finds keyboard shortcuts faster. The edge case is rarely the edge. It is a wider need that the mainstream just has not articulated yet.</p>
         </div>
     </div>
-    <div class="footer">
-        EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
-        <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div id="udl" data-aos="fade-up">
+        <div class="section-full-header">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+            <div class="header-text">
+                <span class="section-tag">CAST Framework</span>
+                <h2>Universal Design for Learning</h2>
+            </div>
+        </div>
+
+        <div class="island" data-aos="fade-up" data-aos-delay="50" style="margin-bottom: 20px;">
+            <p>UDL takes inclusive design and applies it specifically to learning. Instead of designing for an "average" learner and then retrofitting accommodations, UDL builds flexibility into the design from the start. The framework organizes around three brain networks — why we learn, what we learn, and how we show what we know.</p>
+        </div>
+
+        <div class="udl-grid">
+            <div class="udl-card engage" data-aos="fade-up" data-aos-delay="0">
+                <div class="u-icon engage"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                <div class="u-network engage">Affective Networks</div>
+                <strong>Engagement</strong>
+                <ul>
+                    <li>Multiple ways to sustain motivation</li>
+                    <li>User control over speed and sequence</li>
+                    <li>Authentic, relevant challenges</li>
+                    <li>Self-assessment opportunities</li>
+                </ul>
+            </div>
+            <div class="udl-card represent" data-aos="fade-up" data-aos-delay="60">
+                <div class="u-icon represent"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                <div class="u-network represent">Recognition Networks</div>
+                <strong>Representation</strong>
+                <ul>
+                    <li>Alt text, captions, transcripts</li>
+                    <li>Multiple formats for content</li>
+                    <li>Key terms highlighted</li>
+                    <li>Background knowledge activated</li>
+                </ul>
+            </div>
+            <div class="udl-card action" data-aos="fade-up" data-aos-delay="120">
+                <div class="u-icon action"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></div>
+                <div class="u-network action">Strategic Networks</div>
+                <strong>Action &amp; Expression</strong>
+                <ul>
+                    <li>Multiple ways to demonstrate knowledge</li>
+                    <li>Scaffolded practice</li>
+                    <li>Tool fluency support</li>
+                    <li>Executive function aids</li>
+                </ul>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div class="section-2col" id="practice" data-aos="fade-up">
+        <div class="section-aside">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <span class="section-tag">In My Work</span>
+            <h2>What I Am Changing</h2>
+        </div>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>The most immediate change for me is moving accessibility from a QA step to a design step. In practice, that means checking contrast ratios while choosing colors, not after the design is built. It means writing alt text when placing images, not during a pre-launch sweep. It means testing keyboard navigation as I build each component, not running an automated audit at the end and patching the failures.</p>
+                <p>The UDL framework also connects directly to last week's active learning models. Providing multiple means of representation is essentially applying the modality principle at scale. Offering multiple means of action and expression creates constructive and interactive engagement opportunities rather than limiting learners to a single passive format. The theories are not isolated. They reinforce each other.</p>
+            </div>
+            <div class="island" data-aos="fade-up" data-aos-delay="100">
+                <p>Something I had not considered before is the accessibility of text itself. Sans-serif fonts, plain language, proper heading hierarchy, descriptive link text instead of "click here" — these are not just style preferences. They are accessibility requirements that affect how screen readers parse a page and how quickly any user can scan for relevant information. This overlaps with the signaling principle from Mayer: clear structure reduces cognitive load for everyone.</p>
+                <p>One specific thing I plan to implement in my next project is providing transcripts as a default alongside all video content. The ROI argument is convincing on its own — captions increase watch time and audience reach — but the real reason is that it is the right design choice. If someone cannot access the content in its primary format, I have not designed it well enough. That is the reframe from this week that I expect to carry into everything I build going forward.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div class="ref-list" id="references" data-aos="fade-up">
+        <h3>References</h3>
+        <p>CAST. (2018). Universal Design for Learning guidelines version 2.2. <a href="https://udlguidelines.cast.org/">udlguidelines.cast.org</a></p>
+        <p>Gernsbacher, M. A. (2015). Video captions benefit everyone. <em>Policy Insights from the Behavioral and Brain Sciences, 2</em>(1), 195–202.</p>
+        <p>Holmes, K. (2020). <em>Mismatch: How inclusion shapes design</em>. MIT Press.</p>
+        <p>Microsoft. (2018). Inclusive design principles. <a href="https://www.microsoft.com/design/inclusive/">microsoft.com/design/inclusive</a></p>
+        <p>W3C. (2023). Web Content Accessibility Guidelines (WCAG) 2.2. <a href="https://www.w3.org/WAI/WCAG22/quickref/">w3.org</a></p>
+        <p>Hootsuite. (n.d.). Inclusive design for social media. <a href="https://blog.hootsuite.com/inclusive-design-social-media/">blog.hootsuite.com</a></p>
+    </div>
+</div>
+
+<div class="footer">EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026<br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a></div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true, offset: 60 });
+    window.addEventListener('scroll', () => { const h = document.documentElement; document.getElementById('progressBar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%'; });
+    const nav = document.getElementById('stickyNav'), sections = document.querySelectorAll('[id]'), navLinks = nav.querySelectorAll('a');
+    window.addEventListener('scroll', () => { nav.classList.toggle('visible', window.scrollY > 500); let c = ''; sections.forEach(s => { if (s.id && window.scrollY >= s.offsetTop - 200) c = s.id; }); navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + c); }); });
+</script>
 </body>
 </html>

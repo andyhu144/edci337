@@ -3,87 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Models of Active Learning | EDCI 337</title>
+    <title>Models of Active Learning | EDCI 337 — Andy Hu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         :root {
-            --bg: #fafafa; --surface: #ffffff; --border: #e5e7eb;
-            --text: #111827; --text-secondary: #6b7280;
-            --accent: #0d9488; --accent-light: #ccfbf1; --accent-dark: #115e59;
-            --hero-1: #134e4a; --hero-2: #0d9488; --hero-3: #5eead4;
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08); --radius: 16px;
+            --bg: #f8f9fa; --surface: #ffffff; --border: #e8eaed;
+            --text: #1a1a2e; --text-secondary: #5f6368;
+            --accent: #0d9488; --accent-soft: #ccfbf1; --accent-dark: #115e59;
+            --hero-1: #0f332f; --hero-2: #0d9488; --hero-3: #5eead4;
+            --sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --shadow-sm: 0 1px 4px rgba(0,0,0,0.04); --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+            --radius: 20px;
         }
         @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a;
-                --text: #f1f5f9; --text-secondary: #94a3b8; --accent-light: #134e4a;
-                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-            }
+            :root { --bg: #0c0e14; --surface: #161820; --border: #252830; --text: #e8eaed; --text-secondary: #9aa0a6; --accent-soft: #0d332e; --shadow-sm: 0 1px 4px rgba(0,0,0,0.2); --shadow-md: 0 4px 20px rgba(0,0,0,0.3); }
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        .topbar { position: relative; overflow: hidden; padding: 32px 24px 28px; color: white; }
-        .topbar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%); background-size: 200% 200%; animation: g 8s ease infinite; }
-        @keyframes g { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .topbar-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 500; margin-bottom: 16px; transition: color 0.2s; }
-        .back-link:hover { color: white; }
-        .topbar-title { font-size: 1.8em; font-weight: 600; margin-bottom: 6px; }
-        .topbar-meta { font-size: 0.85em; opacity: 0.8; }
-        .badge { display: inline-block; font-size: 0.65em; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); vertical-align: middle; margin-left: 8px; letter-spacing: 0.5px; }
-        .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-        .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-secondary); margin-bottom: 14px; }
-        .resource-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-        .resource-link { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .resource-link:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-        .resource-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .resource-icon.assignment { background: var(--accent-light); color: var(--accent); }
-        .resource-icon.topic { background: #fef3c7; color: #d97706; }
-        .resource-link .label { font-size: 0.92em; font-weight: 500; }
-        .resource-link .sublabel { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
-        .resource-link .arrow { margin-left: auto; color: var(--text-secondary); font-size: 1.1em; }
-        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 50px 40px; text-align: center; }
-        .placeholder h2 { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-        .placeholder p { font-size: 0.9em; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
-        .footer { text-align: center; padding: 32px 24px; font-size: 0.75em; color: var(--text-secondary); }
+        body { font-family: var(--sans); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 1000; width: 0%; transition: width 0.1s linear; }
+        .sticky-nav { position: fixed; top: 24px; right: 24px; z-index: 100; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; box-shadow: var(--shadow-md); font-size: 0.75em; opacity: 0; transform: translateY(-8px); transition: all 0.3s ease; pointer-events: none; }
+        .sticky-nav.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .sticky-nav-title { font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85em; color: var(--text-secondary); margin-bottom: 10px; }
+        .sticky-nav a { display: block; padding: 5px 0; color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; border-left: 2px solid transparent; padding-left: 10px; }
+        .sticky-nav a:hover { color: var(--text); }
+        .sticky-nav a.active { color: var(--accent); border-left-color: var(--accent); }
+        .hero { position: relative; overflow: hidden; padding: 100px 24px 88px; color: white; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, var(--hero-1) 0%, var(--hero-2) 55%, var(--hero-3) 100%); background-size: 200% 200%; animation: drift 10s ease infinite; }
+        .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 25% 60%, rgba(255,255,255,0.07) 0%, transparent 55%), radial-gradient(ellipse at 75% 30%, rgba(255,255,255,0.04) 0%, transparent 45%); }
+        @keyframes drift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .hero-inner { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+        .hero-back { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.82em; font-weight: 500; margin-bottom: 48px; transition: color 0.2s; }
+        .hero-back:hover { color: white; }
+        .hero h1 { font-size: 3em; font-weight: 600; line-height: 1.1; margin-bottom: 40px; }
+        .hero-footer { display: flex; align-items: center; gap: 16px; font-size: 0.8em; opacity: 0.5; }
+        .hero-footer .pill { background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); padding: 5px 14px; border-radius: 100px; font-weight: 500; }
+        .hero-footer .dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+        .content { max-width: 1080px; margin: 0 auto; padding: 64px 24px 80px; }
+        .section-2col { display: grid; grid-template-columns: 240px 1fr; gap: 48px; }
+        .section-aside { position: sticky; top: 100px; align-self: start; }
+        .section-aside .section-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+        .section-aside .section-tag { font-size: 0.65em; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
+        .section-aside h2 { font-size: 1.2em; font-weight: 600; line-height: 1.3; color: var(--text); margin: 0; }
+        .section-body { display: flex; flex-direction: column; gap: 16px; }
+        .section-full-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .section-full-header .section-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .section-full-header .section-tag { font-size: 0.65em; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); }
+        .section-full-header h2 { font-size: 1.2em; font-weight: 600; margin: 0; }
+        .section-full-header .header-text { display: flex; flex-direction: column; gap: 4px; }
+        .island { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 36px; box-shadow: var(--shadow-sm); }
+        .island p { margin-bottom: 14px; font-size: 0.93em; color: var(--text-secondary); line-height: 1.8; }
+        .island p:last-child { margin-bottom: 0; }
+        p { font-size: 0.93em; color: var(--text-secondary); line-height: 1.8; }
+        .divider { max-width: 1080px; margin: 56px auto; padding: 0 24px; }
+        .divider-line { height: 1px; background: var(--border); }
+        /* ICAP spectrum */
+        .spectrum { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-sm); margin: 20px 0; }
+        .spectrum-label { font-size: 0.68em; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 24px; }
+        .spectrum-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .spectrum-item { text-align: center; padding: 20px 12px; border-radius: 14px; border: 1px solid var(--border); transition: all 0.25s; }
+        .spectrum-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .spectrum-item.s1 { background: #fef2f2; border-color: #fecaca; }
+        .spectrum-item.s2 { background: #fef3c7; border-color: #fde68a; }
+        .spectrum-item.s3 { background: #d1fae5; border-color: #a7f3d0; }
+        .spectrum-item.s4 { background: var(--accent-soft); border-color: var(--accent); }
+        .spectrum-item .s-level { font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+        .spectrum-item.s1 .s-level { color: #991b1b; }
+        .spectrum-item.s2 .s-level { color: #92400e; }
+        .spectrum-item.s3 .s-level { color: #065f46; }
+        .spectrum-item.s4 .s-level { color: var(--accent-dark); }
+        .spectrum-item strong { display: block; font-size: 0.88em; margin-bottom: 4px; color: var(--text); }
+        .spectrum-item span { font-size: 0.75em; color: var(--text-secondary); line-height: 1.4; }
+        .spectrum-arrow { display: flex; align-items: center; justify-content: center; margin-top: 16px; gap: 8px; font-size: 0.7em; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); }
+        .spectrum-arrow::before, .spectrum-arrow::after { content: ''; flex: 1; height: 2px; }
+        .spectrum-arrow::before { background: linear-gradient(to right, #fecaca, var(--accent)); }
+        .spectrum-arrow::after { display: none; }
+        /* Merrill cards */
+        .merrill-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 20px 0; }
+        .merrill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 16px; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.25s; }
+        .merrill-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .merrill-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 0.8em; font-weight: 700; }
+        .merrill-card strong { display: block; font-size: 0.82em; margin-bottom: 4px; color: var(--text); }
+        .merrill-card span { font-size: 0.75em; color: var(--text-secondary); line-height: 1.4; }
+        .ref-list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow-sm); }
+        .ref-list h3 { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-bottom: 16px; }
+        .ref-list p { font-size: 0.82em; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.6; }
+        .ref-list a { color: var(--accent); text-decoration: none; }
+        .footer { text-align: center; padding: 40px 24px; font-size: 0.75em; color: var(--text-secondary); border-top: 1px solid var(--border); }
         .footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 900px) { .section-2col { grid-template-columns: 1fr; gap: 24px; } .section-aside { position: static; } .spectrum-track { grid-template-columns: repeat(2, 1fr); } .merrill-grid { grid-template-columns: repeat(2, 1fr); } .sticky-nav { display: none; } }
+        @media (max-width: 600px) { .hero h1 { font-size: 2em; } .hero { padding: 64px 20px 56px; } .content { padding: 48px 20px 60px; } .island { padding: 24px 20px; } .spectrum-track { grid-template-columns: 1fr; } .merrill-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <div class="topbar-content">
-            <a class="back-link" href="../">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                Home
-            </a>
-            <div class="topbar-title">Models of Active Learning<span class="badge">5%</span></div>
-            <div class="topbar-meta">Week 3</div>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="sticky-nav" id="stickyNav">
+    <div class="sticky-nav-title">On this page</div>
+    <a href="#passive-problem">The Problem</a>
+    <a href="#icap">ICAP Framework</a>
+    <a href="#merrill">Merrill's Principles</a>
+    <a href="#application">Application</a>
+    <a href="#references">References</a>
+</nav>
+
+<div class="hero">
+    <div class="hero-inner" data-aos="fade-up" data-aos-duration="600">
+        <a class="hero-back" href="../"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> EDCI 337</a>
+        <h1>Models of Active Learning</h1>
+        <div class="hero-footer">
+            <span>Andy Hu</span><span class="dot"></span><span>January 2026</span><span class="dot"></span><span class="pill">Week 3 &middot; 5%</span>
         </div>
     </div>
-    <div class="main">
-        <div class="section-label">Resources</div>
-        <div class="resource-list">
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/weekly-goals-reflections/" target="_blank">
-                <div class="resource-icon assignment"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
-                <div><div class="label">Substantive Posts</div><div class="sublabel">Instructions & rubric</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/2025/10/19/models-of-active-learning/" target="_blank">
-                <div class="resource-icon topic"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                <div><div class="label">Models of Active Learning</div><div class="sublabel">ICAP, Merrill's principles, game-based learning</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
+</div>
+
+<div class="content">
+    <div class="section-2col" id="passive-problem" data-aos="fade-up">
+        <div class="section-aside">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <span class="section-tag">The Problem</span>
+            <h2>Passive Learning Doesn't Stick</h2>
+        </div>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>Most of my formal education followed the same pattern: sit in a room, listen to someone talk, take notes, go home, study the notes, take a test. The information went in one direction. I retained enough to pass and then forgot most of it within a few weeks. That is not a personal failing. The research is clear: students in passive lecture environments are 1.5 times more likely to fail than those in active learning settings (Freeman et al., 2014).</p>
+                <p>In my own work, I discovered this independently. When I write documentation for a software feature, users skim it and forget. When I build an interactive walkthrough that forces them to complete each step themselves, they learn the feature and rarely need to come back. The difference is engagement mode, and this week's readings gave me a formal framework for understanding why.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div id="icap" data-aos="fade-up">
+        <div class="section-full-header">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+            <div class="header-text">
+                <span class="section-tag">Chi &amp; Wylie (2014)</span>
+                <h2>The ICAP Framework</h2>
+            </div>
         </div>
 
-        <div class="section-label">Submission</div>
-        <div class="placeholder">
-            <h2>Coming Soon</h2>
-            <p>Substantive post on active and interactive learning models</p>
+        <div class="island" data-aos="fade-up" data-aos-delay="50" style="margin-bottom: 20px;">
+            <p>The ICAP framework ranks cognitive engagement into four levels. The core claim is simple: as engagement increases, so does learning. What makes it useful is that it gives concrete ways to evaluate whether a learning activity is actually doing what you think it is doing.</p>
+        </div>
+
+        <div class="spectrum" data-aos="fade-up" data-aos-delay="100">
+            <div class="spectrum-label">Engagement Spectrum</div>
+            <div class="spectrum-track">
+                <div class="spectrum-item s1">
+                    <div class="s-level">Passive</div>
+                    <strong>Receiving</strong>
+                    <span>Watching a lecture, reading without annotation</span>
+                </div>
+                <div class="spectrum-item s2">
+                    <div class="s-level">Active</div>
+                    <strong>Manipulating</strong>
+                    <span>Highlighting, copying, repeating information</span>
+                </div>
+                <div class="spectrum-item s3">
+                    <div class="s-level">Constructive</div>
+                    <strong>Generating</strong>
+                    <span>Explaining in own words, creating summaries, drawing conclusions</span>
+                </div>
+                <div class="spectrum-item s4">
+                    <div class="s-level">Interactive</div>
+                    <strong>Dialoguing</strong>
+                    <span>Debating, collaborating, building on others' ideas</span>
+                </div>
+            </div>
+            <div class="spectrum-arrow">Lower engagement → Higher engagement &amp; learning</div>
+        </div>
+
+        <div class="island" data-aos="fade-up" data-aos-delay="50">
+            <p>What struck me about this framework is the distinction between active and constructive. Highlighting text feels productive. It engages you more than just reading. But it is still just manipulating the existing material — you are not generating new understanding from it. Constructive engagement requires you to produce something that goes beyond the source material: a summary in your own words, a diagram that reorganizes the concepts, an explanation to someone else. That distinction explains why I can highlight an entire textbook chapter and still not understand it the next day.</p>
         </div>
     </div>
-    <div class="footer">
-        EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
-        <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div id="merrill" data-aos="fade-up">
+        <div class="section-full-header">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <div class="header-text">
+                <span class="section-tag">Merrill (2002)</span>
+                <h2>First Principles of Instruction</h2>
+            </div>
+        </div>
+
+        <div class="island" data-aos="fade-up" data-aos-delay="50" style="margin-bottom: 20px;">
+            <p>Merrill's principles are more prescriptive than ICAP. Where ICAP describes levels of engagement, Merrill describes a sequence: start with a real problem, activate what the learner already knows, demonstrate the new knowledge, let them apply it, then help them integrate it into their world. It reads like a design pattern for building effective learning experiences.</p>
+        </div>
+
+        <div class="merrill-grid">
+            <div class="merrill-card" data-aos="fade-up" data-aos-delay="0"><div class="merrill-num">1</div><strong>Problem</strong><span>Engage learners with real-world problems</span></div>
+            <div class="merrill-card" data-aos="fade-up" data-aos-delay="40"><div class="merrill-num">2</div><strong>Activation</strong><span>Build on existing knowledge as foundation</span></div>
+            <div class="merrill-card" data-aos="fade-up" data-aos-delay="80"><div class="merrill-num">3</div><strong>Demonstration</strong><span>Show the new knowledge in action</span></div>
+            <div class="merrill-card" data-aos="fade-up" data-aos-delay="120"><div class="merrill-num">4</div><strong>Application</strong><span>Let learners practice with feedback</span></div>
+            <div class="merrill-card" data-aos="fade-up" data-aos-delay="160"><div class="merrill-num">5</div><strong>Integration</strong><span>Help learners transfer to their world</span></div>
+        </div>
     </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div class="section-2col" id="application" data-aos="fade-up">
+        <div class="section-aside">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <span class="section-tag">Connecting to Practice</span>
+            <h2>Software as Active Learning</h2>
+        </div>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>The most interesting connection for me is that good software onboarding already follows Merrill's principles — it just does not call them that. When a user signs up for a product, the best onboarding flows start with a real task the user wants to accomplish (problem), check what they already know (activation through setup questions), show them how a feature works (demonstration via a guided tour), let them try it immediately (application with inline feedback), and then release them into the full product (integration).</p>
+                <p>Bad onboarding skips most of these steps. It dumps a series of tooltip popups that demonstrate features in isolation without connecting them to a problem the user actually has. That is passive learning disguised as interactivity. The user clicks "Next" through twelve tooltips and remembers none of them. I have built onboarding like this. Now I have a framework for why it failed.</p>
+            </div>
+            <div class="island" data-aos="fade-up" data-aos-delay="100">
+                <p>Game-based learning maps cleanly onto these models too. The Historia example from the course materials uses civilization-building to teach history — the game is the problem context, prior knowledge activates through familiar game mechanics, new concepts are demonstrated through in-game events, application happens through player decisions, and integration occurs when players connect historical patterns to current events. Every game designer intuitively understands Merrill's principles even if they have never heard of them.</p>
+                <p>For my own work, the takeaway is to audit my product's learning moments through the ICAP lens. Where are users passive when they could be constructive? Where are they manipulating (clicking through tutorials) when they could be generating (building something real with guidance)? The framework turns a vague goal like "make onboarding better" into a specific diagnostic question.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div class="ref-list" id="references" data-aos="fade-up">
+        <h3>References</h3>
+        <p>Chi, M. T. H., & Wylie, R. (2014). The ICAP framework: Linking cognitive engagement to active learning outcomes. <em>Educational Psychologist, 49</em>(4), 219–243. <a href="https://doi.org/10.1080/00461520.2014.965823">doi.org</a></p>
+        <p>Freeman, S., Eddy, S., McDonough, M., & Wenderoth, M. P. (2014). Active learning increases student performance in science, engineering, and mathematics. <em>Proceedings of the National Academy of Sciences, 111</em>(23), 8410–8415. <a href="https://doi.org/10.1073/pnas.1319030111">doi.org</a></p>
+        <p>Merrill, M. D. (2002). First principles of instruction. <em>Educational Technology Research and Development, 50</em>(3), 43–59.</p>
+        <p>González, J. (2014). To learn, students need to do something. <em>Cult of Pedagogy</em>. <a href="https://www.cultofpedagogy.com/do-something/">cultofpedagogy.com</a></p>
+        <p>Greenwood, J. (n.d.). Merrill's first principles of instruction. <a href="https://www.james-greenwood.com/instructional-design/toolkit/merrill/">james-greenwood.com</a></p>
+        <p>Harvard Gazette. (2019). Study shows that students learn more when taking part in classrooms that employ active-learning strategies. <a href="https://news.harvard.edu/gazette/story/2019/09/study-shows-that-students-learn-more-when-taking-part-in-classrooms-that-employ-active-learning-strategies/">news.harvard.edu</a></p>
+    </div>
+</div>
+
+<div class="footer">EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026<br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a></div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true, offset: 60 });
+    window.addEventListener('scroll', () => { const h = document.documentElement; document.getElementById('progressBar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%'; });
+    const nav = document.getElementById('stickyNav'), sections = document.querySelectorAll('[id]'), navLinks = nav.querySelectorAll('a');
+    window.addEventListener('scroll', () => { nav.classList.toggle('visible', window.scrollY > 500); let c = ''; sections.forEach(s => { if (s.id && window.scrollY >= s.offsetTop - 200) c = s.id; }); navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + c); }); });
+</script>
 </body>
 </html>
