@@ -3,82 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OER — Peer Feedback | EDCI 337</title>
+    <title>OER Peer Feedback | EDCI 337 | Andy Hu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        :root {
-            --bg: #fafafa; --surface: #ffffff; --border: #e5e7eb;
-            --text: #111827; --text-secondary: #6b7280;
-            --accent: #0d9488; --accent-light: #ccfbf1; --accent-dark: #115e59;
-            --hero-1: #134e4a; --hero-2: #0d9488; --hero-3: #5eead4;
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08); --radius: 16px;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a;
-                --text: #f1f5f9; --text-secondary: #94a3b8; --accent-light: #134e4a;
-                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-            }
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        .topbar { position: relative; overflow: hidden; padding: 32px 24px 28px; color: white; }
-        .topbar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%); background-size: 200% 200%; animation: g 8s ease infinite; }
-        @keyframes g { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .topbar-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 500; margin-bottom: 16px; transition: color 0.2s; }
-        .back-link:hover { color: white; }
-        .topbar-title { font-size: 1.8em; font-weight: 600; margin-bottom: 6px; }
-        .topbar-meta { font-size: 0.85em; opacity: 0.8; }
-        .badge { display: inline-block; font-size: 0.65em; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); vertical-align: middle; margin-left: 8px; letter-spacing: 0.5px; }
-        .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-        .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-secondary); margin-bottom: 14px; }
-        .resource-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-        .resource-link { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .resource-link:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-        .resource-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .resource-icon.assignment { background: var(--accent-light); color: var(--accent); }
-        .resource-icon.topic { background: #fef3c7; color: #d97706; }
-        .resource-link .label { font-size: 0.92em; font-weight: 500; }
-        .resource-link .sublabel { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
-        .resource-link .arrow { margin-left: auto; color: var(--text-secondary); font-size: 1.1em; }
-        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 50px 40px; text-align: center; }
-        .placeholder h2 { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-        .placeholder p { font-size: 0.9em; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
-        .footer { text-align: center; padding: 32px 24px; font-size: 0.75em; color: var(--text-secondary); }
-        .footer a { color: var(--accent); text-decoration: none; }
+        :root{--bg:#f8f9fa;--surface:#fff;--border:#e8eaed;--text:#1a1a2e;--text-secondary:#5f6368;--accent:#0d9488;--accent-soft:#ccfbf1;--accent-dark:#115e59;--hero-1:#0f332f;--hero-2:#0d9488;--hero-3:#5eead4;--sans:'Inter',-apple-system,system-ui,sans-serif;--shadow-sm:0 1px 4px rgba(0,0,0,.04);--shadow-md:0 4px 20px rgba(0,0,0,.06);--radius:20px}@media(prefers-color-scheme:dark){:root{--bg:#0c0e14;--surface:#161820;--border:#252830;--text:#e8eaed;--text-secondary:#9aa0a6;--accent-soft:#0d332e;--shadow-sm:0 1px 4px rgba(0,0,0,.2);--shadow-md:0 4px 20px rgba(0,0,0,.3)}}*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7}.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:1000;width:0%;transition:width .1s linear}.hero{position:relative;overflow:hidden;padding:100px 24px 88px;color:#fff}.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,var(--hero-1) 0%,var(--hero-2) 55%,var(--hero-3) 100%);background-size:200% 200%;animation:drift 10s ease infinite}.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 60%,rgba(255,255,255,.07) 0%,transparent 55%),radial-gradient(ellipse at 75% 30%,rgba(255,255,255,.04) 0%,transparent 45%)}@keyframes drift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}.hero-inner{position:relative;z-index:1;max-width:1080px;margin:0 auto}.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.6);text-decoration:none;font-size:.82em;font-weight:500;margin-bottom:48px;transition:color .2s}.hero-back:hover{color:#fff}.hero h1{font-size:3em;font-weight:600;line-height:1.1;margin-bottom:40px}.hero-footer{display:flex;align-items:center;gap:16px;font-size:.8em;opacity:.5}.hero-footer .pill{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:5px 14px;border-radius:100px;font-weight:500}.hero-footer .dot{width:3px;height:3px;border-radius:50%;background:currentColor}.content{max-width:1080px;margin:0 auto;padding:64px 24px 80px}.divider{max-width:1080px;margin:56px auto;padding:0 24px}.divider-line{height:1px;background:var(--border)}
+        .review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:24px}.review-header{padding:28px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px}.review-avatar{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.1em;font-weight:700;flex-shrink:0}.review-avatar.r1{background:var(--accent-soft);color:var(--accent)}.review-avatar.r2{background:#e0e7ff;color:#4f46e5}.review-meta h3{font-size:1.05em;font-weight:600;color:var(--text);margin-bottom:2px}.review-meta .rm-sub{font-size:.8em;color:var(--text-secondary)}.review-body{padding:28px 32px}.review-body h4{font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:12px;margin-top:24px}.review-body h4:first-child{margin-top:0}.review-body p{font-size:.9em;color:var(--text-secondary);line-height:1.8;margin-bottom:12px}.review-body p:last-child{margin-bottom:0}
+        .footer{text-align:center;padding:40px 24px;font-size:.75em;color:var(--text-secondary);border-top:1px solid var(--border)}.footer a{color:var(--accent);text-decoration:none}
+        @media(max-width:600px){.hero h1{font-size:2em}.hero{padding:64px 20px 56px}.content{padding:48px 20px 60px}.review-header,.review-body{padding:20px}}
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <div class="topbar-content">
-            <a class="back-link" href="../../">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                Home
-            </a>
-            <div class="topbar-title">OER — Peer Feedback<span class="badge">10%</span></div>
-            <div class="topbar-meta">Week 12</div>
-        </div>
-    </div>
-    <div class="main">
-        <div class="section-label">Resources</div>
-        <div class="resource-list">
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/multimedia-challenge-oers/" target="_blank">
-                <div class="resource-icon assignment"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
-                <div><div class="label">OER Challenge</div><div class="sublabel">Full instructions & rubric</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
-        </div>
+<div class="progress-bar" id="progressBar"></div>
 
-        <div class="section-label">Submission</div>
-        <div class="placeholder">
-            <h2>Coming Soon</h2>
-            <p>Review and feedback on classmate OER prototypes</p>
+<div class="hero"><div class="hero-inner" data-aos="fade-up" data-aos-duration="600">
+    <a class="hero-back" href="../../"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> EDCI 337</a>
+    <h1>OER Peer Feedback</h1>
+    <div class="hero-footer"><span>Andy Hu</span><span class="dot"></span><span>March 2026</span><span class="dot"></span><span class="pill">10% &middot; Week 12</span></div>
+</div></div>
+
+<div class="content">
+
+    <!-- Review 1: Avery's Group -->
+    <div class="review-card" data-aos="fade-up">
+        <div class="review-header">
+            <div class="review-avatar r1">AJ</div>
+            <div class="review-meta">
+                <h3>Math as a Language (Avery Joy, James Dennis, Harjot Litt)</h3>
+                <div class="rm-sub">OER Prototype &middot; Teaching addition through mathematical language</div>
+            </div>
+        </div>
+        <div class="review-body">
+            <h4>What Works Well</h4>
+            <p>The framing of this OER is strong. Treating mathematics as a language rather than a set of procedures is a perspective that aligns well with how Merrill's activation principle works. By connecting mathematical symbols to everyday language that students already use, the resource builds on prior knowledge rather than introducing abstract notation in isolation. The group clearly articulated this in their challenge statement, and it carries through the design.</p>
+            <p>The audience analysis is thoughtful. Targeting kindergarten to grade 1 students (ages 5 to 7) who have not yet been introduced to formal addition keeps the scope manageable and the learning objectives specific. The secondary audience consideration (anyone encountering math as communication for the first time) shows the group is thinking about broader applicability, which is a good instinct for an OER.</p>
+            <p>The planned progression from physical manipulatives to pencil and paper to digital quiz prompts is a strong application of scaffolding. It moves the learner through increasingly abstract representations of the same concept, which maps well to Bruner's enactive, iconic, and symbolic stages. The fact that students control their own pace through the website aligns with UDL's engagement principle.</p>
+
+            <h4>Suggestions for Improvement</h4>
+            <p>The prototype is currently a document describing the planned website rather than a functional draft. While the wireframe screenshots give a sense of the layout, it is difficult to evaluate the actual user experience without interacting with it. For the final version, having even a basic functional website would make it much easier to assess whether the cognitive load is managed well in practice. The storyboard suggests a lot of content per page, and without seeing it live, it is hard to tell whether it will feel segmented or overwhelming.</p>
+            <p>The videos mentioned in the storyboard are not yet created, which means a significant portion of the multimedia experience is missing from the prototype. Since the modality principle suggests that narration plus visuals outperforms text plus visuals, the videos will be critical to the resource's effectiveness. I would prioritize getting at least one video completed for the final submission so reviewers and users can evaluate that integration.</p>
+            <p>One area that could be strengthened is the accessibility plan. The document does not mention captions for the planned videos, alt text strategy for the visual elements, or contrast considerations for the website design. Given that the target audience includes young children who may have a range of abilities, building accessibility into the design from the start (rather than adding it later) would significantly improve the resource. Consider referencing the CAST UDL guidelines to ensure all three networks (engagement, representation, action and expression) are addressed explicitly.</p>
+
+            <h4>Questions</h4>
+            <p>How will you handle the transition between the physical manipulative stage and the digital website? Will there be instructions for teachers or parents to facilitate that bridge, or is the website designed to stand alone? Also, have you considered what happens when a student gets a quiz prompt wrong? The feedback mechanism for incorrect answers could be a significant learning opportunity if designed well, or a source of frustration if it simply marks the answer as wrong without explanation.</p>
         </div>
     </div>
-    <div class="footer">
-        EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
-        <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
+
+    <!-- Review 2: Tristan's Group -->
+    <div class="review-card" data-aos="fade-up">
+        <div class="review-header">
+            <div class="review-avatar r2">TG</div>
+            <div class="review-meta">
+                <h3>Essentials of Nutrition (Matt Lowther, Tristan Georges, Khoa Le)</h3>
+                <div class="rm-sub">OER Prototype &middot; Foundational nutrition knowledge for everyday application</div>
+            </div>
+        </div>
+        <div class="review-body">
+            <h4>What Works Well</h4>
+            <p>The topic selection is practical and has broad relevance. Nutrition is something that affects everyone, and the framing around "actionable change" rather than academic biochemistry keeps the focus on application. This aligns well with Merrill's first principle of centering learning around real-world problems. The group is not teaching nutrition as an abstract science but as a tool for making better daily decisions, which gives the learner a clear reason to engage.</p>
+            <p>The plan to use multiple media types (quizzes, instructional diagrams, videos, and text) directly addresses UDL's multiple means of representation. By providing the same nutritional concepts through different formats, the resource accommodates learners who process information differently. The reference list is also notably thorough, drawing from reputable medical sources (Cleveland Clinic, Mayo Clinic, StatPearls) rather than informal wellness content. That credibility matters for a health-related OER.</p>
+            <p>The audience definition is inclusive. Targeting athletes, everyday adults, and people with dietary restrictions (diabetes, plant-based diets, gluten intolerance) shows the group is thinking about diverse needs. This is a good foundation for applying the UDL principle of multiple means of engagement, since different audience segments will have different motivations for learning about nutrition.</p>
+
+            <h4>Suggestions for Improvement</h4>
+            <p>The prototype document includes a "FINAL DESIGN COMING SOON" placeholder, which suggests the website itself is not yet built. For the final submission, the artifact needs to be a functional website or module, not a planning document. I would recommend focusing on getting at least one complete section (for example, the macronutrients overview) fully functional with text, visuals, and interactive elements so the multimedia integration can be evaluated.</p>
+            <p>The document covers the understand and plan phases well but does not include a storyboard or wireframe showing the user journey through the website. Without this, it is difficult to evaluate whether the content will be segmented appropriately or whether the learner might face cognitive overload from too much information on a single page. A visual map of how the user moves from one section to another would strengthen the plan phase significantly.</p>
+            <p>Accessibility is not addressed in the current document. Given that this is a health education resource that could reach a wide audience, considerations like text readability, color contrast for diagrams (especially ones distinguishing different nutrient types), and alternative text for food images should be planned from the beginning. If any of the planned videos include spoken narration, captions and transcripts should be included as a default, not as an optional add-on.</p>
+
+            <h4>Questions</h4>
+            <p>The document mentions targeting people with dietary restrictions. How will the resource handle the sensitivity around dietary advice for individuals with medical conditions like diabetes? Will there be disclaimers clarifying that the resource is educational and not a substitute for professional medical guidance? Also, how will you handle the interactive quiz elements? Will they provide explanatory feedback when a user answers incorrectly, or simply indicate right and wrong? Explanatory feedback would turn the quizzes from recall exercises into genuine learning moments.</p>
+        </div>
     </div>
+
+</div>
+
+<div class="footer">EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026<br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a></div>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({once:true,offset:60});window.addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('progressBar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'});</script>
 </body>
 </html>
