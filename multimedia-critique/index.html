@@ -3,82 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multimedia Critique | EDCI 337</title>
+    <title>Multimedia Critique | EDCI 337 | Andy Hu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        :root {
-            --bg: #fafafa; --surface: #ffffff; --border: #e5e7eb;
-            --text: #111827; --text-secondary: #6b7280;
-            --accent: #0d9488; --accent-light: #ccfbf1; --accent-dark: #115e59;
-            --hero-1: #134e4a; --hero-2: #0d9488; --hero-3: #5eead4;
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08); --radius: 16px;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a;
-                --text: #f1f5f9; --text-secondary: #94a3b8; --accent-light: #134e4a;
-                --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-            }
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        .topbar { position: relative; overflow: hidden; padding: 32px 24px 28px; color: white; }
-        .topbar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%); background-size: 200% 200%; animation: g 8s ease infinite; }
-        @keyframes g { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .topbar-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 500; margin-bottom: 16px; transition: color 0.2s; }
-        .back-link:hover { color: white; }
-        .topbar-title { font-size: 1.8em; font-weight: 600; margin-bottom: 6px; }
-        .topbar-meta { font-size: 0.85em; opacity: 0.8; }
-        .badge { display: inline-block; font-size: 0.65em; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.18); vertical-align: middle; margin-left: 8px; letter-spacing: 0.5px; }
-        .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-        .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text-secondary); margin-bottom: 14px; }
-        .resource-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-        .resource-link { display: flex; align-items: center; gap: 14px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .resource-link:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-        .resource-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .resource-icon.assignment { background: var(--accent-light); color: var(--accent); }
-        .resource-icon.topic { background: #fef3c7; color: #d97706; }
-        .resource-link .label { font-size: 0.92em; font-weight: 500; }
-        .resource-link .sublabel { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
-        .resource-link .arrow { margin-left: auto; color: var(--text-secondary); font-size: 1.1em; }
-        .placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: var(--radius); padding: 50px 40px; text-align: center; }
-        .placeholder h2 { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-        .placeholder p { font-size: 0.9em; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
-        .footer { text-align: center; padding: 32px 24px; font-size: 0.75em; color: var(--text-secondary); }
-        .footer a { color: var(--accent); text-decoration: none; }
+        :root{--bg:#f8f9fa;--surface:#fff;--border:#e8eaed;--text:#1a1a2e;--text-secondary:#5f6368;--accent:#0d9488;--accent-soft:#ccfbf1;--accent-dark:#115e59;--hero-1:#0f332f;--hero-2:#0d9488;--hero-3:#5eead4;--sans:'Inter',-apple-system,system-ui,sans-serif;--shadow-sm:0 1px 4px rgba(0,0,0,.04);--shadow-md:0 4px 20px rgba(0,0,0,.06);--radius:20px}@media(prefers-color-scheme:dark){:root{--bg:#0c0e14;--surface:#161820;--border:#252830;--text:#e8eaed;--text-secondary:#9aa0a6;--accent-soft:#0d332e;--shadow-sm:0 1px 4px rgba(0,0,0,.2);--shadow-md:0 4px 20px rgba(0,0,0,.3)}}*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7}.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:1000;width:0%;transition:width .1s linear}.sticky-nav{position:fixed;top:24px;right:24px;z-index:100;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow-md);font-size:.75em;opacity:0;transform:translateY(-8px);transition:all .3s ease;pointer-events:none}.sticky-nav.visible{opacity:1;transform:translateY(0);pointer-events:all}.sticky-nav-title{font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-size:.85em;color:var(--text-secondary);margin-bottom:10px}.sticky-nav a{display:block;padding:5px 0;color:var(--text-secondary);text-decoration:none;font-weight:500;transition:color .2s;border-left:2px solid transparent;padding-left:10px}.sticky-nav a:hover{color:var(--text)}.sticky-nav a.active{color:var(--accent);border-left-color:var(--accent)}.hero{position:relative;overflow:hidden;padding:100px 24px 88px;color:#fff}.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,var(--hero-1) 0%,var(--hero-2) 55%,var(--hero-3) 100%);background-size:200% 200%;animation:drift 10s ease infinite}.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 60%,rgba(255,255,255,.07) 0%,transparent 55%),radial-gradient(ellipse at 75% 30%,rgba(255,255,255,.04) 0%,transparent 45%)}@keyframes drift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}.hero-inner{position:relative;z-index:1;max-width:1080px;margin:0 auto}.hero-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.6);text-decoration:none;font-size:.82em;font-weight:500;margin-bottom:48px;transition:color .2s}.hero-back:hover{color:#fff}.hero h1{font-size:3em;font-weight:600;line-height:1.1;margin-bottom:40px}.hero-footer{display:flex;align-items:center;gap:16px;font-size:.8em;opacity:.5}.hero-footer .pill{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:5px 14px;border-radius:100px;font-weight:500}.hero-footer .dot{width:3px;height:3px;border-radius:50%;background:currentColor}.content{max-width:1080px;margin:0 auto;padding:64px 24px 80px}.section-2col{display:grid;grid-template-columns:240px 1fr;gap:48px}.section-aside{position:sticky;top:100px;align-self:start}.section-aside .section-icon{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:16px}.section-aside .section-tag{font-size:.65em;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px}.section-aside h2{font-size:1.2em;font-weight:600;line-height:1.3;color:var(--text);margin:0}.section-body{display:flex;flex-direction:column;gap:16px}.section-full-header{display:flex;align-items:center;gap:12px;margin-bottom:24px}.section-full-header .section-icon{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}.section-full-header .header-text{display:flex;flex-direction:column;gap:4px}.section-full-header .section-tag{font-size:.65em;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent)}.section-full-header h2{font-size:1.2em;font-weight:600;margin:0}.island{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 36px;box-shadow:var(--shadow-sm)}.island p{margin-bottom:14px;font-size:.93em;color:var(--text-secondary);line-height:1.8}.island p:last-child{margin-bottom:0}p{font-size:.93em;color:var(--text-secondary);line-height:1.8}.divider{max-width:1080px;margin:56px auto;padding:0 24px}.divider-line{height:1px;background:var(--border)}
+        /* Rubric table */
+        .rubric-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);margin:20px 0}.rubric-table{width:100%;border-collapse:collapse;font-size:.82em}.rubric-table th{background:var(--accent);color:#fff;padding:14px 16px;text-align:left;font-weight:600;font-size:.85em;letter-spacing:.5px}.rubric-table td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--text-secondary)}.rubric-table tr:last-child td{border-bottom:none}.rubric-table td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:140px}.rubric-table tr:nth-child(even){background:var(--bg)}
+        /* Evaluation cards */
+        .eval-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);margin:20px 0}.eval-header{padding:24px 28px;display:flex;align-items:center;gap:16px}.eval-badge{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:700;flex-shrink:0}.eval-badge.poor{background:#fef2f2;color:#991b1b}.eval-badge.adequate{background:#fef3c7;color:#92400e}.eval-badge.excellent{background:#d1fae5;color:#065f46}.eval-info h3{font-size:1em;font-weight:600;color:var(--text);margin-bottom:2px}.eval-info .eval-type{font-size:.78em;color:var(--text-secondary)}.eval-body{padding:0 28px 24px}.eval-body p{font-size:.88em;color:var(--text-secondary);line-height:1.7;margin-bottom:12px}.eval-body p:last-child{margin-bottom:0}.eval-scores{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}.eval-score{text-align:center;padding:10px 8px;background:var(--bg);border-radius:10px;border:1px solid var(--border)}.eval-score .sc-val{font-size:1.2em;font-weight:700;margin-bottom:2px}.eval-score.poor .sc-val{color:#991b1b}.eval-score.adequate .sc-val{color:#92400e}.eval-score.excellent .sc-val{color:#065f46}.eval-score .sc-label{font-size:.65em;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
+        .ref-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;box-shadow:var(--shadow-sm)}.ref-list h3{font-size:.75em;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-secondary);margin-bottom:16px}.ref-list p{font-size:.82em;color:var(--text-secondary);margin-bottom:8px;line-height:1.6}.ref-list a{color:var(--accent);text-decoration:none}.footer{text-align:center;padding:40px 24px;font-size:.75em;color:var(--text-secondary);border-top:1px solid var(--border)}.footer a{color:var(--accent);text-decoration:none}
+        @media(max-width:900px){.section-2col{grid-template-columns:1fr;gap:24px}.section-aside{position:static}.eval-scores{grid-template-columns:repeat(3,1fr)}.sticky-nav{display:none}}@media(max-width:600px){.hero h1{font-size:2em}.hero{padding:64px 20px 56px}.content{padding:48px 20px 60px}.island{padding:24px 20px}.eval-scores{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <div class="topbar-content">
-            <a class="back-link" href="../">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-                Home
-            </a>
-            <div class="topbar-title">Multimedia Critique<span class="badge">15%</span></div>
-            <div class="topbar-meta">Week 5</div>
-        </div>
-    </div>
-    <div class="main">
-        <div class="section-label">Resources</div>
-        <div class="resource-list">
-            <a class="resource-link" href="https://edtechuvic.ca/edci337/multimedia-critique/" target="_blank">
-                <div class="resource-icon assignment"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
-                <div><div class="label">Multimedia Critique</div><div class="sublabel">Instructions & rubric</div></div>
-                <div class="arrow">&rarr;</div>
-            </a>
-        </div>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="sticky-nav" id="stickyNav"><div class="sticky-nav-title">On this page</div><a href="#rubric">The Rubric</a><a href="#poor">Poor Example</a><a href="#adequate">Adequate Example</a><a href="#excellent">Excellent Example</a><a href="#references">References</a></nav>
 
-        <div class="section-label">Submission</div>
-        <div class="placeholder">
-            <h2>Coming Soon</h2>
-            <p>Build a rubric and evaluate three educational resources</p>
+<div class="hero"><div class="hero-inner" data-aos="fade-up" data-aos-duration="600">
+    <a class="hero-back" href="../"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> EDCI 337</a>
+    <h1>Multimedia Critique</h1>
+    <div class="hero-footer"><span>Andy Hu</span><span class="dot"></span><span>February 2026</span><span class="dot"></span><span class="pill">15% &middot; Week 5</span></div>
+</div></div>
+
+<div class="content">
+    <div class="section-2col" id="rubric" data-aos="fade-up">
+        <div class="section-aside">
+            <div class="section-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div>
+            <span class="section-tag">Assessment Tool</span>
+            <h2>The Rubric</h2>
+        </div>
+        <div class="section-body">
+            <div class="island" data-aos="fade-up" data-aos-delay="50">
+                <p>This rubric is built around the three theoretical pillars of the course: Mayer's multimedia learning principles, models of active learning (ICAP and Merrill), and Universal Design for Learning. The goal is to create a tool that any evaluator could apply independently and reach similar conclusions. Each criterion targets an observable, measurable feature of the resource rather than a subjective impression. A resource can look polished and still fail if it overloads working memory, keeps learners passive, or excludes users who need alternative formats. The rubric is designed to catch those failures regardless of surface quality.</p>
+            </div>
+
+            <div class="rubric-wrap" data-aos="fade-up" data-aos-delay="100">
+                <table class="rubric-table">
+                    <thead>
+                        <tr>
+                            <th>Criterion</th>
+                            <th>1 (Poor)</th>
+                            <th>3 (Adequate)</th>
+                            <th>5 (Excellent)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cognitive Load Management</td>
+                            <td>Information presented all at once with no chunking. Redundant channels (text + narration saying the same thing). No signaling or visual hierarchy.</td>
+                            <td>Some segmenting present but inconsistent. Basic headings exist. Minor redundancy issues.</td>
+                            <td>Content is clearly segmented with user pace control. Signaling guides attention. Contiguity maintained between text and visuals. No redundancy across channels.</td>
+                        </tr>
+                        <tr>
+                            <td>Dual Coding &amp; Modality</td>
+                            <td>Single channel only (text wall or narration alone). No meaningful integration of visual and verbal information.</td>
+                            <td>Both channels used but not well integrated. Images are decorative rather than instructional.</td>
+                            <td>Visual and verbal channels work together purposefully. Narration accompanies diagrams (modality principle). Images directly support the learning objective.</td>
+                        </tr>
+                        <tr>
+                            <td>Active Engagement Level</td>
+                            <td>Entirely passive. Learner watches or reads with no interaction, no prompts, no application opportunities.</td>
+                            <td>Some interactive elements exist (quizzes, clickable sections) but engagement stays at the "active" level on the ICAP scale: manipulating without generating.</td>
+                            <td>Constructive or interactive engagement. Learner generates new understanding through problem-solving, reflection prompts, or collaborative elements. Follows Merrill's application principle.</td>
+                        </tr>
+                        <tr>
+                            <td>Accessibility &amp; UDL</td>
+                            <td>No captions, no alt text, poor contrast, no alternative formats. Excludes users with visual, auditory, or motor differences.</td>
+                            <td>Basic accessibility present (captions exist but may be auto-generated and inaccurate). Some alt text. Adequate contrast.</td>
+                            <td>Multiple means of representation (captions, transcripts, alt text, adjustable text size). Multiple means of engagement. Follows WCAG guidelines. Designed inclusively from the start, not retrofitted.</td>
+                        </tr>
+                        <tr>
+                            <td>Coherence &amp; Relevance</td>
+                            <td>Contains tangential content, decorative elements, or off-topic material that does not serve the learning objective.</td>
+                            <td>Mostly focused but includes some extraneous elements (background music, unnecessary animations).</td>
+                            <td>Every element serves the learning objective. No extraneous content. Clean, purposeful design that respects the learner's cognitive resources.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="footer">
-        EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026
-        <br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+
+    <!-- POOR EXAMPLE -->
+    <div class="eval-card" id="poor" data-aos="fade-up">
+        <div class="eval-header">
+            <div class="eval-badge poor">1.4</div>
+            <div class="eval-info">
+                <h3>CrashCourse: The Nervous System (YouTube)</h3>
+                <div class="eval-type">Video Lecture &middot; 10 min &middot; <a href="https://www.youtube.com/watch?v=qPix_X-9t7E" style="color:var(--accent)">youtube.com</a></div>
+            </div>
+        </div>
+        <div class="eval-body">
+            <div class="eval-scores">
+                <div class="eval-score poor"><div class="sc-val">1</div><div class="sc-label">Cog. Load</div></div>
+                <div class="eval-score poor"><div class="sc-val">2</div><div class="sc-label">Dual Coding</div></div>
+                <div class="eval-score poor"><div class="sc-val">1</div><div class="sc-label">Engagement</div></div>
+                <div class="eval-score poor"><div class="sc-val">2</div><div class="sc-label">Accessibility</div></div>
+                <div class="eval-score poor"><div class="sc-val">1</div><div class="sc-label">Coherence</div></div>
+            </div>
+            <p>This video covers the entire nervous system in under ten minutes. The pacing is relentless, with new terminology introduced every few seconds and no pauses for processing. The narrator speaks over rapidly changing animations while on-screen text appears simultaneously, creating a clear redundancy violation. The learner has no control over pacing and no way to segment the content themselves beyond pausing the video manually.</p>
+            <p>The visual animations are engaging on a surface level, but they often serve entertainment rather than instruction. Cartoon characters and visual gags compete with the actual content for attention, violating the coherence principle. The learner is entirely passive throughout. There are no reflection prompts, no embedded questions, and no application opportunities. On the ICAP scale, this is firmly passive.</p>
+            <p>Auto-generated captions are available but contain errors, particularly with scientific terminology. No transcript is provided. The rapid pace makes the captions difficult to follow even for users who are reading along. Alt text is not applicable to video, but the lack of visual descriptions means a user relying on audio alone would miss diagram content that the narrator assumes the viewer can see.</p>
+        </div>
     </div>
+
+    <!-- ADEQUATE EXAMPLE -->
+    <div class="eval-card" id="adequate" data-aos="fade-up">
+        <div class="eval-header">
+            <div class="eval-badge adequate">3.0</div>
+            <div class="eval-info">
+                <h3>Khan Academy: Photosynthesis (Interactive Module)</h3>
+                <div class="eval-type">Interactive Lesson &middot; Self-paced &middot; <a href="https://www.khanacademy.org/science/biology/photosynthesis-in-plants" style="color:var(--accent)">khanacademy.org</a></div>
+            </div>
+        </div>
+        <div class="eval-body">
+            <div class="eval-scores">
+                <div class="eval-score adequate"><div class="sc-val">4</div><div class="sc-label">Cog. Load</div></div>
+                <div class="eval-score adequate"><div class="sc-val">3</div><div class="sc-label">Dual Coding</div></div>
+                <div class="eval-score adequate"><div class="sc-val">3</div><div class="sc-label">Engagement</div></div>
+                <div class="eval-score adequate"><div class="sc-val">3</div><div class="sc-label">Accessibility</div></div>
+                <div class="eval-score adequate"><div class="sc-val">2</div><div class="sc-label">Coherence</div></div>
+            </div>
+            <p>Khan Academy handles cognitive load well. Content is segmented into short videos (typically under six minutes) with clear pretraining of terminology before complex diagrams are introduced. The learner controls the pace, can replay sections, and the progress tracker provides signaling about where they are in the sequence. These are strong applications of the segmenting and pretraining principles.</p>
+            <p>Dual coding is present but not always well integrated. Videos use a digital whiteboard style where the instructor draws diagrams while narrating, which applies the modality principle effectively. However, the accompanying text articles sometimes repeat the exact content of the videos rather than complementing them, creating mild redundancy for learners who engage with both formats.</p>
+            <p>Engagement reaches the "active" level on the ICAP scale. Practice exercises follow each video, asking the learner to apply concepts through multiple-choice and fill-in questions. This is a step above passive viewing, but the exercises are primarily recall-based rather than constructive. The learner manipulates given information rather than generating new understanding. There are no open-ended prompts, no collaborative elements, and no real-world problem scenarios that would push engagement into the constructive or interactive range.</p>
+            <p>Accessibility is adequate. Captions are available and generally accurate. The interface is navigable by keyboard. However, some diagram-heavy content lacks sufficient alt text, and the contrast on certain interactive elements could be improved. The platform does not offer multiple means of expression, as all assessment is through the same question format.</p>
+        </div>
+    </div>
+
+    <!-- EXCELLENT EXAMPLE -->
+    <div class="eval-card" id="excellent" data-aos="fade-up">
+        <div class="eval-header">
+            <div class="eval-badge excellent">4.6</div>
+            <div class="eval-info">
+                <h3>PhET Interactive Simulations: Circuit Construction Kit (University of Colorado Boulder)</h3>
+                <div class="eval-type">Interactive Simulation &middot; Open-ended &middot; <a href="https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc" style="color:var(--accent)">phet.colorado.edu</a></div>
+            </div>
+        </div>
+        <div class="eval-body">
+            <div class="eval-scores">
+                <div class="eval-score excellent"><div class="sc-val">5</div><div class="sc-label">Cog. Load</div></div>
+                <div class="eval-score excellent"><div class="sc-val">5</div><div class="sc-label">Dual Coding</div></div>
+                <div class="eval-score excellent"><div class="sc-val">5</div><div class="sc-label">Engagement</div></div>
+                <div class="eval-score excellent"><div class="sc-val">4</div><div class="sc-label">Accessibility</div></div>
+                <div class="eval-score excellent"><div class="sc-val">4</div><div class="sc-label">Coherence</div></div>
+            </div>
+            <p>PhET simulations are among the best examples of multimedia learning done right. The Circuit Construction Kit lets learners build electrical circuits by dragging components (batteries, resistors, wires, light bulbs) onto a virtual workbench. The simulation responds in real time: connect a circuit correctly and the bulb lights up. Add too much resistance and the current drops visibly. This is Merrill's application principle in its purest form. The learner is not reading about circuits. They are building them and observing the consequences of their decisions.</p>
+            <p>Cognitive load management is excellent. The interface starts with a minimal set of components and lets the learner add complexity at their own pace. Signaling is handled through color coding (current flow is visualized as moving dots) and clear labels that appear contextually. The contiguity principle is applied naturally because the labels are part of the components themselves, not in a separate legend. There is no redundancy because the simulation is the content. There is no narration competing with on-screen text because the learner's interaction replaces both.</p>
+            <p>On the ICAP scale, this sits at the interactive/constructive level. The learner generates hypotheses ("what happens if I add a second battery in series?"), tests them immediately, and revises their mental model based on the result. This is far beyond clicking through a quiz. It is genuine knowledge construction through experimentation, which is exactly what Chi and Wylie (2014) describe as the highest engagement level.</p>
+            <p>Accessibility is strong but not perfect. The simulation includes keyboard navigation, screen reader support for basic elements, and sonification (audio tones representing voltage and current) for visually impaired users. However, some of the more complex interactions still rely heavily on mouse-based drag-and-drop, which presents barriers for users with motor differences. The simulation offers no built-in scaffolding for language learners, though it is available in dozens of languages. Overall, it applies UDL's multiple means of representation and engagement effectively, with room for improvement in action and expression.</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="content" style="padding-top: 0;">
+    <div class="ref-list" id="references" data-aos="fade-up">
+        <h3>References</h3>
+        <p>Mayer, R. E. (Ed.). (2022). <em>The Cambridge handbook of multimedia learning</em> (3rd ed.). Cambridge University Press.</p>
+        <p>Chi, M. T. H., & Wylie, R. (2014). The ICAP framework: Linking cognitive engagement to active learning outcomes. <em>Educational Psychologist, 49</em>(4), 219–243.</p>
+        <p>Merrill, M. D. (2002). First principles of instruction. <em>Educational Technology Research and Development, 50</em>(3), 43–59.</p>
+        <p>CAST. (2018). Universal Design for Learning guidelines version 2.2. <a href="https://udlguidelines.cast.org/">udlguidelines.cast.org</a></p>
+        <p>CrashCourse. (2015). The nervous system [Video]. YouTube. <a href="https://www.youtube.com/watch?v=qPix_X-9t7E">youtube.com</a></p>
+        <p>Khan Academy. (n.d.). Photosynthesis in plants. <a href="https://www.khanacademy.org/science/biology/photosynthesis-in-plants">khanacademy.org</a></p>
+        <p>PhET Interactive Simulations. (n.d.). Circuit construction kit: DC. University of Colorado Boulder. <a href="https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc">phet.colorado.edu</a></p>
+    </div>
+</div>
+
+<div class="footer">EDCI 337 &middot; Interactive &amp; Multimedia Learning &middot; University of Victoria &middot; 2026<br>Instructor: <a href="mailto:agranchelli@uvic.ca">Adrian Granchelli</a></div>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({once:true,offset:60});window.addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('progressBar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'});const nav=document.getElementById('stickyNav'),sections=document.querySelectorAll('[id]'),navLinks=nav.querySelectorAll('a');window.addEventListener('scroll',()=>{nav.classList.toggle('visible',window.scrollY>500);let c='';sections.forEach(s=>{if(s.id&&window.scrollY>=s.offsetTop-200)c=s.id});navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c)})})</script>
 </body>
 </html>
